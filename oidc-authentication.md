@@ -266,7 +266,7 @@ considerations should be reviewed by implementors and system/s architects of thi
 
 ## TLS Requirements
 
-All TLS requirements outlined in [bBCP195](https://tools.ietf.org/html/bcp195) apply to this
+All TLS requirements outlined in [BCP195](https://tools.ietf.org/html/bcp195) apply to this
 specification.
 
 All tokens, client, and user credentials MUST only be transmitted over TLS.
