@@ -191,7 +191,7 @@ authorization flow laid out in this document.
 The client MUST send the IdP a DPoP proof that is valid according to the
 [DPoP Internet-Draft](https://tools.ietf.org/html/draft-fett-oauth-dpop-04).
 
-The audience (`aud`) claim is required in OAuth, however, the DPoP token provides the full URL of
+The audience (`aud`) claim is required for this flow, however, the DPoP token provides the full URL of
 the request, making the `aud` claim redundant, so in Solid-OIDC the `aud` claim MUST be a string
 with the value of `solid`.
 
@@ -266,8 +266,7 @@ considerations should be reviewed by implementors and system/s architects of thi
 
 ## TLS Requirements
 
-All TLS requirements oulined in
-[OIDC Section 16.17](https://openid.net/specs/openid-connect-core-1_0.html#Security) apply to this
+All TLS requirements outlined in [bBCP195](https://tools.ietf.org/html/bcp195) apply to this
 specification.
 
 All tokens, client, and user credentials MUST only be transmitted over TLS.
@@ -289,7 +288,7 @@ _This section is non-normative_
 Clients are ephemeral, client registration is optional, and most clients cannot keep secrets. These,
 among other factors, are what makes client trust challenging.
 
-# Privacy considerations
+# Privacy Considerations
 
 _This section is non-normative_
 
