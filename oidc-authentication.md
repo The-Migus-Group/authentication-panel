@@ -191,8 +191,8 @@ authorization flow laid out in this document.
 The client MUST send the IdP a DPoP proof that is valid according to the
 [DPoP Internet-Draft](https://tools.ietf.org/html/draft-fett-oauth-dpop-04).
 
-The audience (`aud`) claim is required for this flow, however, the DPoP token provides the full URL of
-the request, making the `aud` claim redundant, so in Solid-OIDC the `aud` claim MUST be a string
+The audience (`aud`) claim is required for this flow, however, the DPoP token provides the full URL
+of the request, making the `aud` claim redundant, so in Solid-OIDC the `aud` claim MUST be a string
 with the value of `solid`.
 
 An example Access Token:
@@ -302,7 +302,15 @@ intended RS.
 
 # Acknowledgments
 
-> TODO:
+_This section is non-normative_
+
+The Solid Community Group would like to thank the following individuals for reviewing and providing
+feedback on the specification (in alphabetical order):
+
+Tim Berners-Lee, Justin Bingham, Sarven Capadisli, Aaron Coburn, Matthias Evering, Jamie Fiedler,
+Michiel de Jong, Ted Thibodeau Jr, Kjetil Kjernsmo, Pat McBennett, Adam Migus, Jackson Morgan, Davi
+Ottenheimer, Justin Richer, severin-dsr, Henry Story, Michael Thornburgh, Emmet Townsend, Ruben
+Verborgh, Ricky White, Paul Worrall, Dmitri Zagidulin.
 
 # References
 
