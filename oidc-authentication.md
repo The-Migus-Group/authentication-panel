@@ -164,7 +164,7 @@ The basic authentication and authorization flow is as follows:
 1. The client requests a non-public resource from the RS.
 2. The RS returns a 401 with a `WWW-Authenticate` HTTP header containing parameters that inform the
    client that a DPoP-bound Access Token is required.
-3. The client presents its WebID to the IdP and requests an Authorization Code.
+3. The client presents its client identifier to the IdP and requests an Authorization Code.
 4. The client presents the Authorization Code and a DPoP proof, to the token endpoint.
 5. The Token Endpoint returns a DPoP-bound Access Token and OIDC ID Token, to the client.
 6. The client presents the DPoP-bound Access Token and DPoP proof, to the RS.
@@ -180,7 +180,7 @@ claim. In order to reduce the burden of implementing Solid OIDC on existing IdPs
 compliant with current best practices for Oauth and OIDC, a client identifier remains the key
 mechanism in which an IdP and an RS can identify and determine the trustworthiness of the client
 application. Below are three supported methods in which client applications may identify themselves
-when requesting resources.
+when requesting non-public resources.
 
 ## WebID Document
 
