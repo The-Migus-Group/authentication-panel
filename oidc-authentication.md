@@ -172,15 +172,12 @@ The basic authentication and authorization flow is as follows:
 
 # Client Identifiers
 
-_This section is non-normative_
-
 OAuth and OIDC flows require client applications to obtain a
-[client identifier](https://tools.ietf.org/html/rfc6749#section-2.2) in the form of a `client_id`
-claim. In order to reduce the burden of implementing Solid OIDC on existing IdPs, and to be
-compliant with current best practices for Oauth and OIDC, a client identifier remains the key
-mechanism in which an IdP and an RS can identify and determine the trustworthiness of the client
-application. Below are three supported methods in which client applications may identify themselves
-when requesting non-public resources.
+[client identifier](https://tools.ietf.org/html/rfc6749#section-2.2) in the form of a `client_id`. A
+client identifier remains the key mechanism in which an IdP and an RS can identify and determine the
+trustworthiness of the client application. Below are three supported methods in which client
+applications MAY use to identify themselves when requesting non-public resources. The IdP MUST be
+able to interpret and understand the presented `client_id`, regardless of the format.
 
 ## WebID Document
 
@@ -224,11 +221,12 @@ An example de-refenced document (as [Turtle](https://www.w3.org/TR/turtle/)) for
 
 ## Public Identifier
 
-For clients that wish to remain truely ephemeral, an alternative public identifier of
-`http://www.w3.org/ns/solid/terms#PublicOidcClient` MAY be used.
+For clients that wish to remain truely ephemeral, or that do not have the current ability to use an
+alternative identifier, the public identifier of `http://www.w3.org/ns/solid/terms#PublicOidcClient`
+MAY be used.
 
-If an IdP supports this isdentifier, any `redirect_uri` supplied SHOULD be accepted as valid. In
-this instance the IdP SHOULD NOT defeference the remote IRI.
+If an IdP supports this identifier, any `redirect_uri` supplied SHOULD be accepted as valid. In this
+instance the IdP SHOULD NOT defeference the remote IRI.
 
 All Access Tokens with this identifier MUST be treated as anonymous clients by the RS.
 
@@ -293,12 +291,10 @@ Example:
 
 # Resource Access
 
-Ephemeral clients MUST use DPoP-bound Access Tokens.
-
 ## DPoP Validation
 
-If a `cnf` claim is present in the Access Token, then it must a DPoP Proof must be present and
-validated using the methods outlined in the
+If a `cnf` claim is present in the Access Token, then a DPoP Proof MUST be present and validated
+using the methods outlined in the
 [DPoP Internet-Draft](https://tools.ietf.org/html/draft-fett-oauth-dpop-04#section-4.2).
 
 As defined, this includes ensuring that the DPoP Proof has not expired, and both the URL and the
@@ -313,11 +309,11 @@ to ensure a match, as outlined in the
 
 ### WebID
 
-The `sub` claim of the Access Token MUST be a WebID. This needs to be dereferenced and checked
-against the `iss` claim in the Access Token. If the `iss` claim is different from the domain of the
-WebID, then the RS MUST check the WebID document for a `solid:oidcIssuer` property to check the
-token issuer is listed. This prevents a malicious identity provider from issuing valid Access Tokens
-for arbitrary WebIDs.
+The `sub` claim of the Access Token MUST be the user's WebID. This needs to be dereferenced and
+checked against the `iss` claim in the Access Token. If the `iss` claim is different from the domain
+of the WebID, then the RS MUST check the WebID document for a `solid:oidcIssuer` property to check
+the token issuer is listed. This prevents a malicious identity provider from issuing valid Access
+Tokens for arbitrary WebIDs.
 
 # Security Considerations
 
@@ -335,6 +331,8 @@ specification.
 All tokens, client, and user credentials MUST only be transmitted over TLS.
 
 ## Client IDs
+
+An RS SHOULD assign a fixed set of low trust policies to any client identified as annonymous.
 
 Implementors SHOULD expire client IDs that are kept in server storage to mitigate the potential for
 a bad actor to fill server storage with unexpired or otherwise useless client IDs.
