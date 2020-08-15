@@ -114,6 +114,8 @@ A DPoP proof is a JWT that is signed (using JWS) using a private key chosen by t
 An extension to the Authorization Code flow which mitigates the risk of an authorization code
 interception attack.
 
+**International Resource Identifier (IRI)** as defined by TODO:
+
 # Conformance
 
 _This section is non-normative_
@@ -148,7 +150,7 @@ In line with Linked Data principles, a
 when dereferenced, resolves to a profile document that is structured data in an
 [RDF format](https://www.w3.org/TR/2014/REC-rdf11-concepts-20140225/). This profile document allows
 people to link with others to grant access to identity resources as they see fit. WebIDs are an
-underpinning principle of the Solid movement and are used as the primary identifier for users and
+underpinning principle of the Solid movement and are used as a primary identifier for users and
 client applications in this specification.
 
 # Basic Flow
@@ -168,12 +170,68 @@ The basic authentication and authorization flow is as follows:
 6. The client presents the DPoP-bound Access Token and DPoP proof, to the RS.
 7. The RS validates the Access Token and DPoP header, then returns the requested resource.
 
-# Proof of Identity
+# Client Identifiers
 
-Client registration (static or dynamic) is not required in Solid-OIDC, thus Access Tokens need to be
-bound to the client, to prevent token replay attacks. This is achieved by using a
-[Distributed Proof-of-Possession](https://tools.ietf.org/html/draft-fett-oauth-dpop-04) (DPoP)
-mechanism at the application layer.
+_This section is non-normative_
+
+\[[RFC6749](https://tools.ietf.org/html/rfc6749#section-2.2)\]
+
+## WebID Document
+
+A client MAY use its WebID as the client identifier.
+
+When using this method, the WebID document MUST inlude the `solid:oidcRegistration` property. This
+property and the RDF object MUST be a JSON serialization of an OIDC client registration, using the
+definition of client registration metadata from \[[RFC7591](https://tools.ietf.org/html/rfc7591)\].
+A client WebID SHOULD only list a single registration.
+
+If an IdP supports client WebID negotiation, it MUST derefernce the client's WebID document and MUST
+match any client-supplied parameters with the values in the client's WebID document. For example,
+the `redirect_uri` provided by a client MUST be included in the registration `redirect_uris` list.
+
+A successfully created Access Token MUST include the client's WebID in the `client_id` claim.
+
+An example de-refenced document (as [Turtle](https://www.w3.org/TR/turtle/)) for the client
+WebID: `https://app.example/webid#id`
+
+```
+@prefix solid: <http://www.w3.org/ns/solid/terms#> .
+
+<#id> solid:oidcRegistration """{
+    "client_id" : "https://app.example/webid#id",
+    "client_secret" : "...",
+    "client_secret_expires_at" : 0,
+    "client_id_issued_at" : 1597375004,
+    "redirect_uris" : ["https://app.example/callback"],
+    "client_name" : "Solid Application Name",
+    "client_uri" : "https://app.example/",
+    "logo_uri" : "https://app.example/logo.png",
+    "tos_uri" : "https://app.example/tos.html",
+    "token_endpoint_auth_method" : "client_secret_basic",
+    "scope" : "openid profile offline_access",
+    "grant_types" : ["refresh_token","authorization_code"],
+    "response_types" : ["code"],
+    "default_max_age" : 60000,
+    "require_auth_time" : true
+    }""" .
+```
+
+## Public Identifier
+
+For clients that wish to remain truely ephemeral, an alternative public identifier of
+`http://www.w3.org/ns/solid/terms#PublicOidcClient` MAY be used.
+
+If an IdP supports this isdentifier, any `redirect_uri` supplied SHOULD be accepted as valid. In
+this instance the IdP SHOULD NOT defeference the remote IRI.
+
+All Access Tokens with this identifier MUST be treated as anonymous clients by the RS.
+
+## Dynamic Registration
+
+In addition to the two methods above, clients MAY use standard OIDC dynamic or static registration.
+
+All Access Tokens generated in this way are NOT REQUIRED to include the `client_id` claim. As such,
+an RS should treat this category of Access Tokens as originating from an anonymous clients.
 
 # Token Instantiation
 
@@ -191,7 +249,7 @@ authorization flow laid out in this document.
 The client MUST send the IdP a DPoP proof that is valid according to the
 [DPoP Internet-Draft](https://tools.ietf.org/html/draft-fett-oauth-dpop-04).
 
-The audience (`aud`) claim is required for this flow, however, the DPoP token provides the full URL
+The audience (`aud`) claim is REQUIRED for this flow, however, the DPoP token provides the full URL
 of the request, making the `aud` claim redundant, so in Solid-OIDC the `aud` claim MUST be a string
 with the value of `solid`.
 
@@ -229,8 +287,7 @@ Example:
 
 # Resource Access
 
-Ephemeral clients MUST use DPoP-bound Access Tokens, however, the RS MAY allow registered clients to
-access resources using a traditional `Bearer` tokens.
+Ephemeral clients MUST use DPoP-bound Access Tokens.
 
 ## DPoP Validation
 
