@@ -174,7 +174,13 @@ The basic authentication and authorization flow is as follows:
 
 _This section is non-normative_
 
-\[[RFC6749](https://tools.ietf.org/html/rfc6749#section-2.2)\]
+OAuth and OIDC flows require client applications to obtain a
+[client identifier](https://tools.ietf.org/html/rfc6749#section-2.2) in the form of a `client_id`
+claim. In order to reduce the burden of implementing Solid OIDC on existing IdPs, and to be
+compliant with current best practices for Oauth and OIDC, a client identifier remains the key
+mechanism in which an IdP and an RS can identify and determine the trustworthiness of the client
+application. Below are three supported methods in which client applications may identify themselves
+when requesting resources.
 
 ## WebID Document
 
@@ -191,8 +197,8 @@ the `redirect_uri` provided by a client MUST be included in the registration `re
 
 A successfully created Access Token MUST include the client's WebID in the `client_id` claim.
 
-An example de-refenced document (as [Turtle](https://www.w3.org/TR/turtle/)) for the client
-WebID: `https://app.example/webid#id`
+An example de-refenced document (as [Turtle](https://www.w3.org/TR/turtle/)) for the client WebID:
+`https://app.example/webid#id`
 
 ```
 @prefix solid: <http://www.w3.org/ns/solid/terms#> .
