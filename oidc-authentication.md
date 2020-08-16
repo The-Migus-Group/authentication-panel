@@ -306,8 +306,13 @@ Internet-Draft.
 
 ## Validating the Access Token
 
+The RS MUST fetch the public signing keys from IdPs JWKS for token introspection. This MAY be
+achieved by via standard OIDC discovery.
 
-### WebID
+An RS reserves the right to constrain which IdPs it trusts, including non-allowlisted IdPs, and
+therfore MAY reject the authentication in a request for any reason it determines.
+
+### Subject Claim
 
 The `sub` claim of the Access Token MUST be the user's WebID. This needs to be dereferenced and
 checked against the `iss` claim in the Access Token. If the `iss` claim is different from the domain
