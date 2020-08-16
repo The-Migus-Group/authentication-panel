@@ -250,6 +250,9 @@ authorization flow laid out in this document.
 
 ## Access Token
 
+All Access Tokens MUST be valid JWTs, as defined by
+\[[RFC7519](https://tools.ietf.org/html/rfc7519)\].
+
 The client MUST send the IdP a DPoP proof that is valid according to the
 [DPoP Internet-Draft](https://tools.ietf.org/html/draft-fett-oauth-dpop-04).
 
@@ -294,18 +297,15 @@ Example:
 ## DPoP Validation
 
 If a `cnf` claim is present in the Access Token, then a DPoP Proof MUST be present and validated
-using the methods outlined in the
-[DPoP Internet-Draft](https://tools.ietf.org/html/draft-fett-oauth-dpop-04#section-4.2).
+using the methods outlined in the DPoP Internet-Draft
+[Section 4.2](https://tools.ietf.org/html/draft-fett-oauth-dpop-04#section-4.2).
 
-As defined, this includes ensuring that the DPoP Proof has not expired, and both the URL and the
-HTTP method match that of the requested resource. If any of these checks fail, the RS MUST deny the
-resource request.
+The RS MUST check that the DPoP Proof and the Access Token are a bound pair, as defined in
+[Section 7](https://tools.ietf.org/html/draft-fett-oauth-dpop-04#section-7) of the DPoP
+Internet-Draft.
 
 ## Validating the Access Token
 
-The public key in the fingerprint of the Access Token MUST be checked against the DPoP fingerprint
-to ensure a match, as outlined in the
-[DPoP Internet-Draft](https://tools.ietf.org/html/draft-fett-oauth-dpop-04#section-6).
 
 ### WebID
 
@@ -325,7 +325,7 @@ considerations should be reviewed by implementors and system/s architects of thi
 
 ## TLS Requirements
 
-All TLS requirements outlined in [BCP195](https://tools.ietf.org/html/bcp195) apply to this
+All TLS requirements outlined in \[[BCP195](https://tools.ietf.org/html/bcp195)\] apply to this
 specification.
 
 All tokens, client, and user credentials MUST only be transmitted over TLS.
