@@ -168,7 +168,8 @@ The basic authentication and authorization flow is as follows:
 4. The client presents the Authorization Code and a DPoP proof, to the token endpoint.
 5. The Token Endpoint returns a DPoP-bound Access Token and OIDC ID Token, to the client.
 6. The client presents the DPoP-bound Access Token and DPoP proof, to the RS.
-7. The RS validates the Access Token and DPoP header, then returns the requested resource.
+7. The RS fetched the public signing keys from the IdP for token introspection.
+8. The RS validates the Access Token and DPoP header, then returns the requested resource.
 
 # Client Identifiers
 
@@ -230,12 +231,12 @@ instance the IdP SHOULD NOT defeference the remote IRI.
 
 All Access Tokens with this identifier MUST be treated as anonymous clients by the RS.
 
-## Dynamic Registration
+## OIDC Registration
 
 In addition to the two methods above, clients MAY use standard OIDC dynamic or static registration.
 
 All Access Tokens generated in this way are NOT REQUIRED to include the `client_id` claim. As such,
-an RS should treat this category of Access Tokens as originating from an anonymous clients.
+an RS should treat this category of Access Tokens as originating from anonymous clients.
 
 # Token Instantiation
 
@@ -253,25 +254,40 @@ authorization flow laid out in this document.
 All Access Tokens MUST be valid JWTs, as defined by
 \[[RFC7519](https://tools.ietf.org/html/rfc7519)\].
 
-The client MUST send the IdP a DPoP proof that is valid according to the
-[DPoP Internet-Draft](https://tools.ietf.org/html/draft-fett-oauth-dpop-04).
+When requesting an Access Token, The client MUST send the IdP a DPoP proof that is valid according
+to the [DPoP Internet-Draft](https://tools.ietf.org/html/draft-fett-oauth-dpop-04).
 
-The audience (`aud`) claim is REQUIRED for this flow, however, the DPoP token provides the full URL
-of the request, making the `aud` claim redundant, so in Solid-OIDC the `aud` claim MUST be a string
-with the value of `solid`.
+The Access Token MUST contain at least these claims:
+
+`sub` — REQUIRED. This claim MUST be the user's WebID.
+
+`iss` — REQUIRED. The issuer claim MUST be a valid URL of the IdP instantiating this token.
+
+`aud` — REQUIRED. However, the DPoP token provides the full URL of the request, making the `aud`
+claim redundant, so in Solid-OIDC the `aud` claim MUST be a string with the value of `solid`.
+
+`iat` — REQUIRED. The issued-at claim is the time at which this crendential was issued.
+
+`exp` — REQUIRED. This credential expiration is seperate from the ID tokens expiration.
+
+`cnf` — For all flows that require DPoP, the confirmation claim is REQUIRED, as per
+[DPoP Internet-Draft](https://tools.ietf.org/html/draft-fett-oauth-dpop-04#section-7) specification.
+
+`client_id` — REQUIRED in all flows except OIDC registration.
 
 An example Access Token:
 
 ```js
 {
-    "sub": "https://janedoe.com/web#id", // Web ID of User
+    "sub": "https://janedoe.com/web#id",
     "iss": "https://idp.example.com",
     "aud": "solid",
     "iat": 1541493724,
-    "exp": 1573029723, // Identity credential expiration (separate from the ID token expiration)
+    "exp": 1573029723,
     "cnf":{
-      "jkt":"0ZcOCORZNYy-DWpqq30jZyJGHTN0d2HglBV3uiguA4I" // DPoP public key confirmation claim
+      "jkt":"0ZcOCORZNYy-DWpqq30jZyJGHTN0d2HglBV3uiguA4I"
     },
+    "client_id": "https://client.example.com/web#id"
 }
 ```
 
@@ -312,13 +328,13 @@ achieved by via standard OIDC discovery.
 An RS reserves the right to constrain which IdPs it trusts, including non-allowlisted IdPs, and
 therfore MAY reject the authentication in a request for any reason it determines.
 
-### Subject Claim
+The RS MUST confirm the presence of all required fields, as documented in section TODO: XX of this
+document.
 
-The `sub` claim of the Access Token MUST be the user's WebID. This needs to be dereferenced and
-checked against the `iss` claim in the Access Token. If the `iss` claim is different from the domain
-of the WebID, then the RS MUST check the WebID document for a `solid:oidcIssuer` property to check
-the token issuer is listed. This prevents a malicious identity provider from issuing valid Access
-Tokens for arbitrary WebIDs.
+The user's WebID in the `sub` claim MUST be dereferenced and checked against the `iss` claim in the
+Access Token. If the `iss` claim is different from the domain of the WebID, then the RS MUST check
+the WebID document for a `solid:oidcIssuer` property to check the token issuer is listed. This
+prevents a malicious identity provider from issuing valid Access Tokens for arbitrary WebIDs.
 
 # Security Considerations
 
