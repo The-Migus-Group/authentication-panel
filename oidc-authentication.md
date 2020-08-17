@@ -322,7 +322,7 @@ Internet-Draft.
 
 ## Validating the Access Token
 
-The RS MUST fetch the public signing keys from IdPs JWKS for token introspection. This MAY be
+The RS MUST fetch the public signing keys from the IdPs JWKS for token introspection. This MAY be
 achieved by via standard OIDC discovery.
 
 An RS reserves the right to constrain which IdPs it trusts, including non-allowlisted IdPs, and
