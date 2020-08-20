@@ -181,12 +181,12 @@ methods of establishing a `client_id`.
 
 A client MAY use its WebID as the client identifier.
 
-When using this method, the WebID document MUST inlude the `solid:oidcRegistration` property. This
+When using this method, the WebID document MUST include the `solid:oidcRegistration` property. This
 property and the RDF object MUST be a JSON serialization of an OIDC client registration, using the
 definition of client registration metadata from \[[RFC7591](https://tools.ietf.org/html/rfc7591)\].
 A client WebID SHOULD only list a single registration.
 
-If an IdP supports client WebID negotiation, it MUST derefernce the client's WebID document and MUST
+If an IdP supports client WebID negotiation, it MUST dereference the client's WebID document and MUST
 match any client-supplied parameters with the values in the client's WebID document. For example,
 the `redirect_uri` provided by a client MUST be included in the registration `redirect_uris` list.
 
@@ -219,12 +219,12 @@ An example de-refenced document (as [Turtle](https://www.w3.org/TR/turtle/)) for
 
 ## Public Identifier
 
-For clients that wish to remain truely ephemeral, or that do not have the current ability to use an
+For clients that wish to remain truly ephemeral, or that do not have the current ability to use an
 alternative identifier, the public identifier of `http://www.w3.org/ns/solid/terms#PublicOidcClient`
 MAY be used.
 
 If an IdP supports this identifier, any `redirect_uri` supplied SHOULD be accepted as valid. In this
-instance the IdP SHOULD NOT defeference the remote IRI.
+instance the IdP SHOULD NOT dereference the remote IRI.
 
 All Access Tokens with this identifier MUST be treated as anonymous clients by the RS.
 
@@ -323,7 +323,7 @@ The RS MUST fetch the public signing keys from the IdPs JWKS for token introspec
 achieved by via standard OIDC discovery.
 
 An RS reserves the right to constrain which IdPs it trusts, including non-allowlisted IdPs, and
-therfore MAY reject the authentication in a request for any reason it determines.
+therefore MAY reject the authentication in a request for any reason it determines.
 
 The RS MUST confirm the presence of all required fields, as documented in section TODO: XX of this
 document.
