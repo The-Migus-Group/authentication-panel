@@ -173,12 +173,9 @@ The basic authentication and authorization flow is as follows:
 
 # Client Identifiers
 
-OAuth and OIDC flows require client applications to obtain a
-[client identifier](https://tools.ietf.org/html/rfc6749#section-2.2) in the form of a `client_id`. A
-client identifier remains the key mechanism in which an IdP and an RS can identify and determine the
-trustworthiness of the client application. Below are three supported methods in which client
-applications MAY use to identify themselves when requesting non-public resources. The IdP MUST be
-able to interpret and understand the presented `client_id`, regardless of the format.
+OAuth and OIDC require the client application to identify itself to the IdP and RS by presenting a
+[client identifier](https://tools.ietf.org/html/rfc6749#section-2.2). Below are three supported
+methods of establishing a `client_id`.
 
 ## WebID Document
 
