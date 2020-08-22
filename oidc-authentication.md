@@ -164,12 +164,12 @@ The basic authentication and authorization flow is as follows:
 1. The client requests a non-public resource from the RS.
 2. The RS returns a 401 with a `WWW-Authenticate` HTTP header containing parameters that inform the
    client that a DPoP-bound Access Token is required.
-3. The client presents its client identifier to the IdP and requests an Authorization Code.
-4. The client presents the Authorization Code and a DPoP proof, to the token endpoint.
-5. The Token Endpoint returns a DPoP-bound Access Token and OIDC ID Token, to the client.
+3. The Client presents its Client ID to the IdP and requests an Authorization Code.
+4. The Client presents the Authorization Code and a DPoP proof, to the Token Endpoint.
+5. The Token Endpoint returns a DPoP-bound Access Token and OIDC ID Token, to the Client.
 6. The client presents the DPoP-bound Access Token and DPoP proof, to the RS.
-7. The RS fetches the public signing keys from the IdP for token introspection.
-8. The RS validates the Access Token and DPoP header, then returns the requested resource.
+7. The RS gets the public key from the IdP and uses it to validate the DPoP proof and Access Token.
+
 
 # Client Identifiers
 
