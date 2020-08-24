@@ -53,7 +53,7 @@ functionality is required.
 
 The additional functionality is aimed at addressing:
 
-1. Ephemeral clients as a common use case.
+1. Ephemeral Clients as a common use case.
 2. Resource servers with no existing trust relationship with identity providers.
 
 ## Out of Scope
@@ -150,8 +150,8 @@ In line with Linked Data principles, a
 when dereferenced, resolves to a profile document that is structured data in an
 [RDF format](https://www.w3.org/TR/2014/REC-rdf11-concepts-20140225/). This profile document allows
 people to link with others to grant access to identity resources as they see fit. WebIDs are an
-underpinning principle of the Solid movement and are used as a primary identifier for users and
-client applications in this specification.
+underpinning principle of the Solid movement and are used as a primary identifier for Users and
+Client applications in this specification.
 
 # Basic Flow
 
@@ -161,38 +161,38 @@ _This section is non-normative_
 
 The basic authentication and authorization flow is as follows:
 
-1. The client requests a non-public resource from the RS.
+1. The Client requests a non-public resource from the RS.
 2. The RS returns a 401 with a `WWW-Authenticate` HTTP header containing parameters that inform the
-   client that a DPoP-bound Access Token is required.
+   Client that a DPoP-bound Access Token is required.
 3. The Client presents its Client ID to the IdP and requests an Authorization Code.
 4. The Client presents the Authorization Code and a DPoP proof, to the Token Endpoint.
 5. The Token Endpoint returns a DPoP-bound Access Token and OIDC ID Token, to the Client.
-6. The client presents the DPoP-bound Access Token and DPoP proof, to the RS.
+6. The Client presents the DPoP-bound Access Token and DPoP proof, to the RS.
 7. The RS gets the public key from the IdP and uses it to validate the DPoP proof and Access Token.
 
 
 # Client Identifiers
 
-OAuth and OIDC require the client application to identify itself to the IdP and RS by presenting a
+OAuth and OIDC require the Client application to identify itself to the IdP and RS by presenting a
 [client identifier](https://tools.ietf.org/html/rfc6749#section-2.2) (`client_id`). Below are three
 supported methods of establishing a `client_id`.
 
 ## WebID Document
 
-A client MAY use its WebID as the client identifier.
+A Client MAY use its WebID as the client identifier.
 
 When using this method, the WebID document MUST include the `solid:oidcRegistration` property. This
 property and the RDF object MUST be a JSON serialization of an OIDC client registration, using the
 definition of client registration metadata from \[[RFC7591](https://tools.ietf.org/html/rfc7591)\].
-A client WebID SHOULD only list a single registration.
+A Client WebID SHOULD only list a single registration.
 
-If an IdP supports client WebID negotiation, it MUST dereference the client's WebID document and MUST
-match any client-supplied parameters with the values in the client's WebID document. For example,
-the `redirect_uri` provided by a client MUST be included in the registration `redirect_uris` list.
+If an IdP supports Client WebID negotiation, it MUST dereference the Client's WebID document and MUST
+match any Client-supplied parameters with the values in the Client's WebID document. For example,
+the `redirect_uri` provided by a Client MUST be included in the registration `redirect_uris` list.
 
-A successfully created Access Token MUST include the client's WebID in the `client_id` claim.
+A successfully created Access Token MUST include the Client's WebID in the `client_id` claim.
 
-An example de-refenced document (as [Turtle](https://www.w3.org/TR/turtle/)) for the client WebID:
+An example de-refenced document (as [Turtle](https://www.w3.org/TR/turtle/)) for the Client WebID:
 `https://app.example/webid#id`
 
 ```
@@ -219,25 +219,25 @@ An example de-refenced document (as [Turtle](https://www.w3.org/TR/turtle/)) for
 
 ## Public Identifier
 
-For clients that wish to remain truly ephemeral, or that do not have the current ability to use an
+For Clients that wish to remain truly ephemeral, or that do not have the current ability to use an
 alternative identifier, the public identifier of `http://www.w3.org/ns/solid/terms#PublicOidcClient`
 MAY be used.
 
 If an IdP supports this identifier, any `redirect_uri` supplied SHOULD be accepted as valid. In this
 instance the IdP SHOULD NOT dereference the remote IRI.
 
-All Access Tokens with this identifier MUST be treated as anonymous clients by the RS.
+All Access Tokens with this identifier MUST be treated as anonymous Clients by the RS.
 
 ## OIDC Registration
 
-In addition to the two methods above, clients MAY use standard OIDC dynamic or static registration.
+In addition to the two methods above, Clients MAY use standard OIDC dynamic or static registration.
 
 All Access Tokens generated in this way are NOT REQUIRED to include the `client_id` claim. As such,
-an RS should treat this category of Access Tokens as originating from anonymous clients.
+an RS should treat this category of Access Tokens as originating from anonymous Clients.
 
 # Token Instantiation
 
-Assuming the token request and DPoP Proof are valid, the client MUST receive two tokens from the
+Assuming the token request and DPoP Proof are valid, the Client MUST receive two tokens from the
 IdP:
 
 1. A DPoP-bound Access Token
@@ -251,7 +251,7 @@ authorization flow laid out in this document.
 All Access Tokens MUST be valid JWTs, as defined by
 \[[RFC7519](https://tools.ietf.org/html/rfc7519)\].
 
-When requesting an Access Token, The client MUST send the IdP a DPoP proof that is valid according
+When requesting an Access Token, The Client MUST send the IdP a DPoP proof that is valid according
 to the [DPoP Internet-Draft](https://tools.ietf.org/html/draft-fett-oauth-dpop-04).
 
 The Access Token MUST contain at least these claims:
@@ -346,26 +346,26 @@ considerations should be reviewed by implementors and system/s architects of thi
 All TLS requirements outlined in \[[BCP195](https://tools.ietf.org/html/bcp195)\] apply to this
 specification.
 
-All tokens, client, and user credentials MUST only be transmitted over TLS.
+All tokens, Client, and User credentials MUST only be transmitted over TLS.
 
 ## Client IDs
 
 An RS SHOULD assign a fixed set of low trust policies to any client identified as annonymous.
 
-Implementors SHOULD expire client IDs that are kept in server storage to mitigate the potential for
-a bad actor to fill server storage with unexpired or otherwise useless client IDs.
+Implementors SHOULD expire Client IDs that are kept in server storage to mitigate the potential for
+a bad actor to fill server storage with unexpired or otherwise useless Client IDs.
 
 ## Client Secrets
 
 Client secrets SHOULD NOT be stored in browser local storage. Doing so will increase the risk of
-data leaks should an attacker gain access to client credentials.
+data leaks should an attacker gain access to Client credentials.
 
 ## Client Trust
 
 _This section is non-normative_
 
-Clients are ephemeral, client registration is optional, and most clients cannot keep secrets. These,
-among other factors, are what makes client trust challenging.
+Clients are ephemeral, client registration is optional, and most Clients cannot keep secrets. These,
+among other factors, are what makes Client trust challenging.
 
 # Privacy Considerations
 
