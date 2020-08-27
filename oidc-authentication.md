@@ -183,12 +183,14 @@ A Client MAY use its WebID as the client identifier.
 
 When using this method, the WebID document MUST include the `solid:oidcRegistration` property. This
 property and the RDF object MUST be a JSON serialization of an OIDC client registration, using the
-definition of client registration metadata from \[[RFC7591](https://tools.ietf.org/html/rfc7591)\].
-A Client WebID SHOULD only list a single registration.
+definition of client registration metadata from
+\[[RFC7591](https://tools.ietf.org/html/rfc7591#section-2)\]. A Client WebID SHOULD only list a
+single registration.
 
-If an IdP supports Client WebID negotiation, it MUST dereference the Client's WebID document and MUST
-match any Client-supplied parameters with the values in the Client's WebID document. For example,
-the `redirect_uri` provided by a Client MUST be included in the registration `redirect_uris` list.
+If an IdP supports Client WebID negotiation, it MUST dereference the Client's WebID document and
+MUST match any Client-supplied parameters with the values in the Client's WebID document. For
+example, the `redirect_uri` provided by a Client MUST be included in the registration
+`redirect_uris` list.
 
 A successfully created Access Token MUST include the Client's WebID in the `client_id` claim.
 
