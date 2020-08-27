@@ -169,7 +169,7 @@ The basic authentication and authorization flow is as follows:
 5. The Token Endpoint returns a DPoP-bound Access Token and OIDC ID Token, to the Client.
 6. The Client presents the DPoP-bound Access Token and DPoP proof, to the RS.
 7. The RS gets the public key from the IdP and uses it to validate the DPoP proof and Access Token.
-
+8. The RS returns the requested resource if authentication successful.
 
 # Client Identifiers
 
