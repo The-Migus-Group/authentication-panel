@@ -200,8 +200,6 @@ An example de-refenced document (as [Turtle](https://www.w3.org/TR/turtle/)) for
 
 <#id> solid:oidcRegistration """{
     "client_id" : "https://app.example/webid#id",
-    "client_secret" : "...",
-    "client_secret_expires_at" : 0,
     "client_id_issued_at" : 1597375004,
     "redirect_uris" : ["https://app.example/callback"],
     "client_name" : "Solid Application Name",
