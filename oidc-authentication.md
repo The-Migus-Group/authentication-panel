@@ -202,13 +202,11 @@ An example de-refenced document (as [Turtle](https://www.w3.org/TR/turtle/)) for
 
 <#id> solid:oidcRegistration """{
     "client_id" : "https://app.example/webid#id",
-    "client_id_issued_at" : 1597375004,
     "redirect_uris" : ["https://app.example/callback"],
     "client_name" : "Solid Application Name",
     "client_uri" : "https://app.example/",
     "logo_uri" : "https://app.example/logo.png",
     "tos_uri" : "https://app.example/tos.html",
-    "token_endpoint_auth_method" : "client_secret_basic",
     "scope" : "openid profile offline_access",
     "grant_types" : ["refresh_token","authorization_code"],
     "response_types" : ["code"],
