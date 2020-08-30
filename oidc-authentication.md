@@ -45,9 +45,9 @@ client.
 
 The [OAuth 2.0](https://tools.ietf.org/html/rfc6749) and
 [OpenID Connect Core 1.0](https://openid.net/specs/openid-connect-core-1_0.html) web standards were
-published in October 2012, and November 2014, respectively. Since publication, they have increased
+published in October 2012 and November 2014, respectively. Since publication, they have increased
 with a marked pace and have claimed wide adoption with extensive _'real-world'_ data and experience.
-The strengths of the protocols are now clear, however, in a changing eco-system where privacy and
+The strengths of the protocols are now clear; however, in a changing eco-system where privacy and
 control of digital identities are becoming more pressing concerns, it is also clear that additional
 functionality is required.
 
@@ -60,7 +60,7 @@ The additional functionality is aimed at addressing:
 
 _This section is non-normative_
 
-At the time of writing, there is no demonstrated use case for a strongly asserted identity, however,
+At the time of writing, there is no demonstrated use case for a strongly asserted identity; however,
 it is likely that authorization requirements will necessitate it.
 
 # Terminology
@@ -114,7 +114,11 @@ A DPoP proof is a JWT that is signed (using JWS) using a private key chosen by t
 An extension to the Authorization Code flow which mitigates the risk of an authorization code
 interception attack.
 
-**International Resource Identifier (IRI)** as defined by TODO:
+**Internationalized Resource Identifier (IRI)** _as defined by
+[RFC3987](https://tools.ietf.org/html/rfc3987)_
+
+An IRI is a sequence of characters from the Universal Character Set that can be used instead of
+URIs to identify resources.
 
 # Conformance
 
@@ -148,9 +152,9 @@ _This section is non-normative_
 In line with Linked Data principles, a
 [WebID](https://dvcs.w3.org/hg/WebID/raw-file/tip/spec/identity-respec.html) is a HTTP URI that,
 when dereferenced, resolves to a profile document that is structured data in an
-[RDF format](https://www.w3.org/TR/2014/REC-rdf11-concepts-20140225/). This profile document allows
+[RDF 1.1 format](https://www.w3.org/TR/rdf11-concepts/). This profile document allows
 people to link with others to grant access to identity resources as they see fit. WebIDs are an
-underpinning principle of the Solid movement and are used as a primary identifier for Users and
+underpinning principle of the Solid ecosystem and are used as a primary identifier for Users and
 Client applications in this specification.
 
 # Basic Flow
@@ -165,10 +169,10 @@ The basic authentication and authorization flow is as follows:
 2. The RS returns a 401 with a `WWW-Authenticate` HTTP header containing parameters that inform the
    Client that a DPoP-bound Access Token is required.
 3. The Client presents its Client ID to the IdP and requests an Authorization Code.
-4. The Client presents the Authorization Code and a DPoP proof, to the Token Endpoint.
-5. The Token Endpoint returns a DPoP-bound Access Token and OIDC ID Token, to the Client.
-6. The Client presents the DPoP-bound Access Token and DPoP proof, to the RS.
-7. The RS gets the public key from the IdP and uses it to validate the DPoP proof and Access Token.
+4. The Client presents the Authorization Code and a DPoP proof to the Token Endpoint.
+5. The Token Endpoint returns a DPoP-bound Access Token and OIDC ID Token to the Client.
+6. The Client presents the DPoP-bound Access Token and DPoP proof to the RS.
+7. The RS retrieves the public key from the IdP and uses it to validate the DPoP proof and Access Token.
 8. The RS returns the requested resource if authentication successful.
 
 # Client Identifiers
@@ -181,11 +185,11 @@ supported methods of establishing a `client_id`.
 
 A Client MAY use its WebID as the client identifier.
 
-When using this method, the WebID document MUST include the `solid:oidcRegistration` property. This
-property and the RDF object MUST be a JSON serialization of an OIDC client registration, using the
-definition of client registration metadata from
-\[[RFC7591](https://tools.ietf.org/html/rfc7591#section-2)\]. A Client WebID SHOULD only list a
-single registration.
+When using this method, the WebID document MUST include the
+`http://www.w3.org/ns/solid/terms#oidcRegistration` property. This property and the RDF object MUST
+be a JSON serialization of an OIDC client registration, using the definition of client registration
+metadata from \[[RFC7591](https://tools.ietf.org/html/rfc7591#section-2)\]. A Client WebID SHOULD
+only list a single registration.
 
 If an IdP supports Client WebID negotiation, it MUST dereference the Client's WebID document and
 MUST match any Client-supplied parameters with the values in the Client's WebID document. For
@@ -317,7 +321,7 @@ Internet-Draft.
 
 ## Validating the Access Token
 
-The RS MUST fetch the public signing keys from the IdPs JWKS for token introspection. This MAY be
+The RS MUST fetch the public signing keys from the IdP's JWKS for token introspection. This MAY be
 achieved by via standard OIDC discovery.
 
 An RS reserves the right to constrain which IdPs it trusts, including non-allowlisted IdPs, and
@@ -328,8 +332,9 @@ document.
 
 The user's WebID in the `sub` claim MUST be dereferenced and checked against the `iss` claim in the
 Access Token. If the `iss` claim is different from the domain of the WebID, then the RS MUST check
-the WebID document for a `solid:oidcIssuer` property to check the token issuer is listed. This
-prevents a malicious identity provider from issuing valid Access Tokens for arbitrary WebIDs.
+the WebID document for a `http://www.w3.org/ns/solid/terms#oidcIssuer` property to check the token
+issuer is listed. This prevents a malicious identity provider from issuing valid Access Tokens for
+arbitrary WebIDs.
 
 # Security Considerations
 
