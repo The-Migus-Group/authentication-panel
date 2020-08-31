@@ -5,7 +5,7 @@
 A key challenge on the path toward re-decentralizing user data on the Worldwide Web is the need to
 access multiple potentially untrusted resources servers securely. This document aims to address that
 challenge by building on top of current and future web standards, to allow entities to authenticate
-within a distributed ecosystem.
+within a Solid ecosystem.
 
 # Status of This Document
 
@@ -79,7 +79,7 @@ terminology used in the
 [The OAuth 2.0 Authorization Framework](https://tools.ietf.org/html/rfc6749) (OAuth) refers to this
 same entity as an Authorization Server.
 
-This specification also defines the following terms:
+This specification also uses the following terms:
 
 **WebID** _as defined in the
 [WebID 1.0 Editors Draft](https://dvcs.w3.org/hg/WebID/raw-file/tip/spec/identity-respec.html)_
@@ -189,7 +189,8 @@ example, the `redirect_uri` provided by a Client MUST be included in the registr
 `redirect_uris` list.
 
 The method by which a IdP resolves the WebID presented to it by the Client, is defined in
-\[[?](https://stackoverflow.com/...)\]. This example uses [Turtle](https://www.w3.org/TR/turtle/)):
+\[[WebID 1.0](https://www.w3.org/2005/Incubator/webid/spec/identity/#processing-the-webid-profile)\].
+This example uses [Turtle](https://www.w3.org/TR/turtle/):
 
 ```
 https://app.example/webid#id
