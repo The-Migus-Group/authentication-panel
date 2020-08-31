@@ -149,9 +149,8 @@ In line with Linked Data principles, a
 [WebID](https://dvcs.w3.org/hg/WebID/raw-file/tip/spec/identity-respec.html) is a HTTP URI that,
 when dereferenced, resolves to a profile document that is structured data in an
 [RDF format](https://www.w3.org/TR/2014/REC-rdf11-concepts-20140225/). This profile document allows
-people to link with others to grant access to identity resources as they see fit. WebIDs are an
-underpinning principle of the Solid movement and are used as a primary identifier for Users and
-Client applications in this specification.
+people to link with others to grant access to identity resources as they see fit. WebIDs underpin
+Solid and are used as a primary identifier for Users and Client applications in this specification.
 
 # Basic Flow
 
@@ -174,30 +173,28 @@ The basic authentication and authorization flow is as follows:
 # Client Identifiers
 
 OAuth and OIDC require the Client application to identify itself to the IdP and RS by presenting a
-[client identifier](https://tools.ietf.org/html/rfc6749#section-2.2) (`client_id`). Below are three
-supported methods of establishing a `client_id`.
+[client identifier](https://tools.ietf.org/html/rfc6749#section-2.2). Solid applications SHOULD use
+a WebID.
 
-## WebID Document
+## WebID
 
-A Client MAY use its WebID as the client identifier.
-
-When using this method, the WebID document MUST include the `solid:oidcRegistration` property. This
-property and the RDF object MUST be a JSON serialization of an OIDC client registration, using the
-definition of client registration metadata from
-\[[RFC7591](https://tools.ietf.org/html/rfc7591#section-2)\]. A Client WebID SHOULD only list a
-single registration.
+When a Client uses the WebID, it must resolve to an RDF document that MUST include a single
+`solid:oidcRegistration` property. This property MUST be a JSON serialization of an OIDC client
+registration, using the definition of client registration metadata from
+\[[RFC7591](https://tools.ietf.org/html/rfc7591#section-2)\].
 
 If an IdP supports Client WebID negotiation, it MUST dereference the Client's WebID document and
 MUST match any Client-supplied parameters with the values in the Client's WebID document. For
 example, the `redirect_uri` provided by a Client MUST be included in the registration
 `redirect_uris` list.
 
-A successfully created Access Token MUST include the Client's WebID in the `client_id` claim.
-
-An example de-refenced document (as [Turtle](https://www.w3.org/TR/turtle/)) for the Client WebID:
-`https://app.example/webid#id`
+The method by which a IdP resolves the WebID presented to it by the Client, is defined in
+\[[?](https://stackoverflow.com/...)\]. This example uses [Turtle](https://www.w3.org/TR/turtle/)):
 
 ```
+https://app.example/webid#id
+
+
 @prefix solid: <http://www.w3.org/ns/solid/terms#> .
 
 <#id> solid:oidcRegistration """{
@@ -215,23 +212,16 @@ An example de-refenced document (as [Turtle](https://www.w3.org/TR/turtle/)) for
     }""" .
 ```
 
-## Public Identifier
+## The Public WebID
 
-For Clients that wish to remain truly ephemeral, or that do not have the current ability to use an
-alternative identifier, the public identifier of `http://www.w3.org/ns/solid/terms#PublicOidcClient`
-MAY be used.
-
-If an IdP supports this identifier, any `redirect_uri` supplied SHOULD be accepted as valid. In this
-instance the IdP SHOULD NOT dereference the remote IRI.
-
-All Access Tokens with this identifier MUST be treated as anonymous Clients by the RS.
+Ephemeral Clients MAY use the identifier `http://www.w3.org/ns/solid/terms#PublicOidcClient`. If the
+Client uses this identifier then IdP MAY accept any `redirect_uri` as valid. Since it is public, the
+Client is effectively anonymous to the RS.
 
 ## OIDC Registration
 
-In addition to the two methods above, Clients MAY use standard OIDC dynamic or static registration.
-
-All Access Tokens generated in this way are NOT REQUIRED to include the `client_id` claim. As such,
-an RS should treat this category of Access Tokens as originating from anonymous Clients.
+If the Client does not use a WebID then it MUST use a client identifier registered with the IdP via
+either OIDC dynamic or static registration.
 
 # Token Instantiation
 
