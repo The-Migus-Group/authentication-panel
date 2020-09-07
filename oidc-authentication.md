@@ -163,32 +163,33 @@ The basic authentication and authorization flow is as follows:
 1. The Client requests a non-public resource from the RS.
 2. The RS returns a 401 with a `WWW-Authenticate` HTTP header containing parameters that inform the
    Client that a DPoP-bound Access Token is required.
-3. The Client presents its Client ID to the IdP and requests an Authorization Code.
-4. The Client presents the Authorization Code and a DPoP proof, to the Token Endpoint.
+3. The Client presents its Client Identifier and the associated Secret to the IdP and requests an
+   Authorization Code.
+4. If granted, the Client presents the Authorization Code and a DPoP proof, to the Token Endpoint.
 5. The Token Endpoint returns a DPoP-bound Access Token and OIDC ID Token, to the Client.
 6. The Client presents the DPoP-bound Access Token and DPoP proof, to the RS.
 7. The RS gets the public key from the IdP and uses it to validate the DPoP proof and Access Token.
-8. The RS returns the requested resource if authentication successful.
+8. If the DPoP proof and Access Token are valid then The RS returns the requested resource.
 
 # Client Identifiers
 
 OAuth and OIDC require the Client application to identify itself to the IdP and RS by presenting a
-[client identifier](https://tools.ietf.org/html/rfc6749#section-2.2). Solid applications SHOULD use
-a WebID.
+[client identifier](https://tools.ietf.org/html/rfc6749#section-2.2) (Client ID). Solid applications
+SHOULD use a WebID as their Client ID.
 
 ## WebID
 
-When a Client uses the WebID, it must resolve to an RDF document that MUST include a single
-`solid:oidcRegistration` property. This property MUST be a JSON serialization of an OIDC client
-registration, using the definition of client registration metadata from
-\[[RFC7591](https://tools.ietf.org/html/rfc7591#section-2)\].
+The WebID itself MUST resolve to an RDF document that MUST include a single `solid:oidcRegistration`
+property. That property MUST be a JSON serialization of an OIDC client registration, per the definition
+of client registration metadata from \[[RFC7591](https://tools.ietf.org/html/rfc7591#section-2)\].
 
-If an IdP supports Client WebID negotiation, it MUST dereference the Client's WebID document and
-MUST match any Client-supplied parameters with the values in the Client's WebID document. For
-example, the `redirect_uri` provided by a Client MUST be included in the registration
-`redirect_uris` list.
+Also, the IdP MUST dereference the Client's WebID document and match any Client-supplied parameters,
+with the values in the Client's WebID document.
 
-The method by which a IdP resolves the WebID presented to it by the Client, is defined in
+Further, the `redirect_uri` provided by the Client MUST be included in the registration `redirect_uris`
+list.
+
+NOTE: the method by which the IdP resolves the WebID to an RDF document, is defined in
 \[[WebID 1.0](https://www.w3.org/2005/Incubator/webid/spec/identity/#processing-the-webid-profile)\].
 This example uses [Turtle](https://www.w3.org/TR/turtle/):
 
@@ -226,24 +227,20 @@ either OIDC dynamic or static registration.
 
 # Token Instantiation
 
-Assuming the token request and DPoP Proof are valid, the Client MUST receive two tokens from the
-IdP:
+Assuming the Client ID and Secret, and the DPoP Proof are valid, the IdP MUST return two tokens to
+the Client:
 
 1. A DPoP-bound Access Token
 2. An OIDC ID Token
 
-These tokens require additional and/or modified claims for them to be compliant with the
-authorization flow laid out in this document.
+## DPoP-bound Access Token
 
-## Access Token
+The DPoP-bound Access Token MUST be a valid JWT. See \[[RFC7519](https://tools.ietf.org/html/rfc7519)\].
 
-All Access Tokens MUST be valid JWTs, as defined by
-\[[RFC7519](https://tools.ietf.org/html/rfc7519)\].
+When requesting an DPoP-bound Access Token, the Client MUST send the IdP a DPoP proof that is valid
+according to the [DPoP Internet-Draft](https://tools.ietf.org/html/draft-fett-oauth-dpop-04).
 
-When requesting an Access Token, The Client MUST send the IdP a DPoP proof that is valid according
-to the [DPoP Internet-Draft](https://tools.ietf.org/html/draft-fett-oauth-dpop-04).
-
-The Access Token MUST contain at least these claims:
+The DPoP-bound Access Token MUST contain at least these claims:
 
 `sub` — REQUIRED. This claim MUST be the user's WebID.
 
@@ -261,7 +258,7 @@ claim redundant, so in Solid-OIDC the `aud` claim MUST be a string with the valu
 
 `client_id` — REQUIRED in all flows except OIDC registration.
 
-An example Access Token:
+An example DPoP-bound Access Token:
 
 ```js
 {
@@ -277,9 +274,9 @@ An example Access Token:
 }
 ```
 
-## ID Token
+## OIDC ID Token
 
-The subject (`sub`) claim in the returning ID Token MUST be set to the user's WebID.
+The subject (`sub`) claim MUST be the user's WebID.
 
 Example:
 
@@ -296,26 +293,18 @@ Example:
 
 # Resource Access
 
-## DPoP Validation
+## DPoP Proof Validation
 
-If a `cnf` claim is present in the Access Token, then a DPoP Proof MUST be present and validated
-using the methods outlined in the DPoP Internet-Draft
-[Section 4.2](https://tools.ietf.org/html/draft-fett-oauth-dpop-04#section-4.2).
+A DPoP Proof that is valid according to
+[DPoP Internet-Draft, Section 4.2](https://tools.ietf.org/html/draft-fett-oauth-dpop-04#section-4.2),
+MUST be present when a DPoP-bound Access Token is used.
 
-The RS MUST check that the DPoP Proof and the Access Token are a bound pair, as defined in
-[Section 7](https://tools.ietf.org/html/draft-fett-oauth-dpop-04#section-7) of the DPoP
-Internet-Draft.
+## Access Token Validation
 
-## Validating the Access Token
-
-The RS MUST fetch the public signing keys from the IdPs JWKS for token introspection. This MAY be
-achieved by via standard OIDC discovery.
-
-An RS reserves the right to constrain which IdPs it trusts, including non-allowlisted IdPs, and
-therefore MAY reject the authentication in a request for any reason it determines.
-
-The RS MUST confirm the presence of all required fields, as documented in section TODO: XX of this
-document.
+The DPoP-bound Access Token MUST be validated according to
+[DPoP Internet-Draft, Section 7](https://tools.ietf.org/html/draft-fett-oauth-dpop-04#section-7)
+but the RS MAY perform additional verification in order to determine whether to grant access to the
+resource.
 
 The user's WebID in the `sub` claim MUST be dereferenced and checked against the `iss` claim in the
 Access Token. If the `iss` claim is different from the domain of the WebID, then the RS MUST check
@@ -339,7 +328,7 @@ All tokens, Client, and User credentials MUST only be transmitted over TLS.
 
 ## Client IDs
 
-An RS SHOULD assign a fixed set of low trust policies to any client identified as annonymous.
+An RS SHOULD assign a fixed set of low trust policies to any client identified as anonymous.
 
 Implementors SHOULD expire Client IDs that are kept in server storage to mitigate the potential for
 a bad actor to fill server storage with unexpired or otherwise useless Client IDs.
