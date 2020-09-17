@@ -3,7 +3,7 @@ Title: SOLID-OIDC
 Boilerplate: issues-index no
 Shortname: solid-oidc
 Level: 1
-Status: w3c/ED
+Status: w3c/FPWD
 Group: Solid Community Group
 URL: https://solid.github.io/specification/solid-oidc/
 Repository: https://github.com/solid/specification
@@ -12,19 +12,13 @@ Max ToC Depth: 2
 Editor: Adam Migus
 Editor: Ricky White
 Abstract:
-  This specification is written for Authorization and Resource Server owners intending to implement
-    Solid-OIDC. It is also useful to Solid application developers charged with implementing a Solid-OIDC
-    client.
+  A key challenge on the path toward re-decentralizing user data on the Worldwide Web is the need to
+  access multiple potentially untrusted resources servers securely. This document aims to address that
+  challenge by building on top of current and future web standards, to allow entities to authenticate
+  within a Solid ecosystem.
 </pre>
 
-# Abstract
-
-A key challenge on the path toward re-decentralizing user data on the Worldwide Web is the need to
-access multiple potentially untrusted resources servers securely. This document aims to address that
-challenge by building on top of current and future web standards, to allow entities to authenticate
-within a Solid ecosystem.
-
-# Status of This Document
+# Status of This Document 
 
 This section describes the status of this document at the time of its publication. Other documents
 may supersede this document. A list of current W3C publications and the latest revision of this
@@ -367,9 +361,9 @@ among other factors, are what makes Client trust challenging.
 
 # Privacy Considerations
 
-*This section is non-normative*
-
 ## Access Token Reuse
+
+*This section is non-normative*
 
 With JWTs being extendable by design, there is potential for a privacy breach if Access Tokens get
 reused across multiple resource servers. It is not unimaginable that a custom claim is added to the
@@ -385,12 +379,6 @@ The Solid Community Group would like to thank the following individuals for revi
 feedback on the specification (in alphabetical order):
 
 Tim Berners-Lee, Justin Bingham, Sarven Capadisli, Aaron Coburn, Matthias Evering, Jamie Fiedler,
-Michiel de Jong, Ted Thibodeau Jr, Kjetil Kjernsmo, Pat McBennett, Adam Migus, Jackson Morgan, Davi
+Michiel de Jong, Ted Thibodeau Jr, Kjetil Kjernsmo, Mitzi László, Pat McBennett, Adam Migus, Jackson Morgan, Davi
 Ottenheimer, Justin Richer, severin-dsr, Henry Story, Michael Thornburgh, Emmet Townsend, Ruben
 Verborgh, Ricky White, Paul Worrall, Dmitri Zagidulin.
-
-# References
-
-> TODO:
-
-
