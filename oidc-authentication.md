@@ -114,8 +114,6 @@ A DPoP proof is a JWT that is signed (using JWS) using a private key chosen by t
 An extension to the Authorization Code flow which mitigates the risk of an authorization code
 interception attack.
 
-**International Resource Identifier (IRI)** as defined by TODO:
-
 # Conformance
 
 _This section is non-normative_
@@ -347,9 +345,9 @@ among other factors, are what makes Client trust challenging.
 
 # Privacy Considerations
 
-_This section is non-normative_
-
 ## Access Token Reuse
+
+_This section is non-normative_
 
 With JWTs being extendable by design, there is potential for a privacy breach if Access Tokens get
 reused across multiple resource servers. It is not unimaginable that a custom claim is added to the
@@ -365,7 +363,7 @@ The Solid Community Group would like to thank the following individuals for revi
 feedback on the specification (in alphabetical order):
 
 Tim Berners-Lee, Justin Bingham, Sarven Capadisli, Aaron Coburn, Matthias Evering, Jamie Fiedler,
-Michiel de Jong, Ted Thibodeau Jr, Kjetil Kjernsmo, Pat McBennett, Adam Migus, Jackson Morgan, Davi
+Michiel de Jong, Ted Thibodeau Jr, Kjetil Kjernsmo, Mitzi László, Pat McBennett, Adam Migus, Jackson Morgan, Davi
 Ottenheimer, Justin Richer, severin-dsr, Henry Story, Michael Thornburgh, Emmet Townsend, Ruben
 Verborgh, Ricky White, Paul Worrall, Dmitri Zagidulin.
 
