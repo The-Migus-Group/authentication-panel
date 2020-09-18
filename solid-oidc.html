@@ -1223,7 +1223,7 @@ Possible extra rowspan handling
 </style>
   <meta content="Bikeshed version 5f7b0e20, updated Tue Aug 18 15:46:28 2020 -0700" name="generator">
   <link href="https://solid.github.io/specification/solid-oidc/" rel="canonical">
-  <meta content="8c491b93e819a26c2694c7429f1b549fd3810a3b" name="document-revision">
+  <meta content="b9d4fb601188be96bf7cdbcaf0f872fe0462c136" name="document-revision">
 <style>/* style-autolinks */
 
 .css.css, .property.property, .descriptor.descriptor {
@@ -1410,54 +1410,52 @@ Parts of this work may be from another specification document.  If so, those par
   <nav data-fill-with="table-of-contents" id="toc">
    <h2 class="no-num no-toc no-ref" id="contents">Table of Contents</h2>
    <ol class="toc" role="directory">
-    <li><a href="#status-of-this-document"><span class="secno">1</span> <span class="content">Status of This Document</span></a>
     <li>
-     <a href="#introduction"><span class="secno">2</span> <span class="content">Introduction</span></a>
+     <a href="#intro"><span class="secno">1</span> <span class="content">Introduction</span></a>
      <ol class="toc">
-      <li><a href="#out-of-scope"><span class="secno">2.1</span> <span class="content">Out of Scope</span></a>
+      <li><a href="#intro-out-of-scope"><span class="secno">1.1</span> <span class="content">Out of Scope</span></a>
      </ol>
-    <li><a href="#terminology"><span class="secno">3</span> <span class="content">Terminology</span></a>
-    <li><a href="#conformance"><span class="secno">4</span> <span class="content">Conformance</span></a>
+    <li><a href="#terms"><span class="secno">2</span> <span class="content">Terminology</span></a>
     <li>
-     <a href="#core-concepts"><span class="secno">5</span> <span class="content">Core Concepts</span></a>
+     <a href="#concepts"><span class="secno">3</span> <span class="content">Core Concepts</span></a>
      <ol class="toc">
-      <li><a href="#webids"><span class="secno">5.1</span> <span class="content">WebIDs</span></a>
+      <li><a href="#concepts-webids"><span class="secno">3.1</span> <span class="content">WebIDs</span></a>
      </ol>
-    <li><a href="#basic-flow"><span class="secno">6</span> <span class="content">Basic Flow</span></a>
+    <li><a href="#basic-flow"><span class="secno">4</span> <span class="content">Basic Flow</span></a>
     <li>
-     <a href="#client-identifiers"><span class="secno">7</span> <span class="content">Client Identifiers</span></a>
+     <a href="#clientids"><span class="secno">5</span> <span class="content">Client Identifiers</span></a>
      <ol class="toc">
-      <li><a href="#webid"><span class="secno">7.1</span> <span class="content">WebID</span></a>
-      <li><a href="#the-public-webid"><span class="secno">7.2</span> <span class="content">The Public WebID</span></a>
-      <li><a href="#oidc-registration"><span class="secno">7.3</span> <span class="content">OIDC Registration</span></a>
+      <li><a href="#clientids-webid"><span class="secno">5.1</span> <span class="content">WebID</span></a>
+      <li><a href="#clientids-public-webid"><span class="secno">5.2</span> <span class="content">The Public WebID</span></a>
+      <li><a href="#clientids-oidc"><span class="secno">5.3</span> <span class="content">OIDC Registration</span></a>
      </ol>
     <li>
-     <a href="#token-instantiation"><span class="secno">8</span> <span class="content">Token Instantiation</span></a>
+     <a href="#tokens"><span class="secno">6</span> <span class="content">Token Instantiation</span></a>
      <ol class="toc">
-      <li><a href="#dpop-bound-access-token"><span class="secno">8.1</span> <span class="content">DPoP-bound Access Token</span></a>
-      <li><a href="#oidc-id-token"><span class="secno">8.2</span> <span class="content">OIDC ID Token</span></a>
+      <li><a href="#tokens-access"><span class="secno">6.1</span> <span class="content">DPoP-bound Access Token</span></a>
+      <li><a href="#tokens-id"><span class="secno">6.2</span> <span class="content">OIDC ID Token</span></a>
      </ol>
     <li>
-     <a href="#resource-access"><span class="secno">9</span> <span class="content">Resource Access</span></a>
+     <a href="#resource"><span class="secno">7</span> <span class="content">Resource Access</span></a>
      <ol class="toc">
-      <li><a href="#dpop-proof-validation"><span class="secno">9.1</span> <span class="content">DPoP Proof Validation</span></a>
-      <li><a href="#access-token-validation"><span class="secno">9.2</span> <span class="content">Access Token Validation</span></a>
+      <li><a href="#resource-dpop-validation"><span class="secno">7.1</span> <span class="content">DPoP Proof Validation</span></a>
+      <li><a href="#resource-access-validation"><span class="secno">7.2</span> <span class="content">Access Token Validation</span></a>
      </ol>
     <li>
-     <a href="#security-considerations"><span class="secno">10</span> <span class="content">Security Considerations</span></a>
+     <a href="#security"><span class="secno">8</span> <span class="content">Security Considerations</span></a>
      <ol class="toc">
-      <li><a href="#tls-requirements"><span class="secno">10.1</span> <span class="content">TLS Requirements</span></a>
-      <li><a href="#client-ids"><span class="secno">10.2</span> <span class="content">Client IDs</span></a>
-      <li><a href="#client-secrets"><span class="secno">10.3</span> <span class="content">Client Secrets</span></a>
-      <li><a href="#client-trust"><span class="secno">10.4</span> <span class="content">Client Trust</span></a>
+      <li><a href="#security-tls"><span class="secno">8.1</span> <span class="content">TLS Requirements</span></a>
+      <li><a href="#security-client-ids"><span class="secno">8.2</span> <span class="content">Client IDs</span></a>
+      <li><a href="#security-client-secrets"><span class="secno">8.3</span> <span class="content">Client Secrets</span></a>
+      <li><a href="#security-client-trust"><span class="secno">8.4</span> <span class="content">Client Trust</span></a>
      </ol>
     <li>
-     <a href="#privacy-considerations"><span class="secno">11</span> <span class="content">Privacy Considerations</span></a>
+     <a href="#privacy"><span class="secno">9</span> <span class="content">Privacy Considerations</span></a>
      <ol class="toc">
-      <li><a href="#access-token-reuse"><span class="secno">11.1</span> <span class="content">Access Token Reuse</span></a>
+      <li><a href="#privacy-token-reuse"><span class="secno">9.1</span> <span class="content">Access Token Reuse</span></a>
      </ol>
-    <li><a href="#acknowledgments"><span class="secno">12</span> <span class="content">Acknowledgments</span></a>
-    <li><a href="#conformance①"><span class="secno"></span> <span class="content"> Conformance</span></a>
+    <li><a href="#acknowledgments"><span class="secno">10</span> <span class="content">Acknowledgments</span></a>
+    <li><a href="#conformance"><span class="secno"></span> <span class="content"> Conformance</span></a>
     <li>
      <a href="#references"><span class="secno"></span> <span class="content">References</span></a>
      <ol class="toc">
@@ -1466,24 +1464,21 @@ Parts of this work may be from another specification document.  If so, those par
    </ol>
   </nav>
   <main>
-   <h2 class="heading settled" data-level="1" id="status-of-this-document"><span class="secno">1. </span><span class="content">Status of This Document</span><a class="self-link" href="#status-of-this-document"></a></h2>
+   <h2 class="no-num no-toc heading settled" id="status"><span class="content">Status of This Document</span></h2>
    <p>This section describes the status of this document at the time of its publication. Other documents
 may supersede this document. A list of current W3C publications and the latest revision of this
 technical report can be found in the <a href="https://www.w3.org/TR/">W3C technical reports index</a> at
 https://www.w3.org/TR/.</p>
-   <p>
-    This document is produced from work by
+   <p>This document is produced from work by
 the <a href="https://www.w3.org/community/solid/">Solid Community Group</a>. It is a draft document that may,
 or may not, be officially published. It may be updated, replaced, or obsoleted by other documents at
 any time. It is inappropriate to cite this document as anything other than work in progress. The
 source code for this document is available at the following
-URI: 
-    <httpsU0003A authentication-panel github.com solid></httpsU0003A>
-   </p>
+URI: <a href="https://github.com/solid/authentication-panel">https://github.com/solid/authentication-panel</a></p>
    <p>This document was published by the <a href="https://github.com/solid/process/blob/master/panels.md#authentication">Solid Authentication Panel</a> as a First Draft.</p>
    <p><a href="https://github.com/solid/authentication-panel/issues">GitHub Issues</a> are preferred for discussion
 of this specification. Alternatively, you can send comments to our mailing list. Please send them to <a href="mailto:public-solid@w3.org">public-solid@w3.org</a> (<a href="https://lists.w3.org/Archives/Public/public-solid/">archives</a>)</p>
-   <h2 class="heading settled" data-level="2" id="introduction"><span class="secno">2. </span><span class="content">Introduction</span><a class="self-link" href="#introduction"></a></h2>
+   <h2 class="heading settled" data-level="1" id="intro"><span class="secno">1. </span><span class="content">Introduction</span><a class="self-link" href="#intro"></a></h2>
    <p><em>This section is non-normative</em></p>
    <p>The <a href="https://solidproject.org/">Solid project</a> aims to change the way web applications work today to
 improve privacy and user control of personal data by utilizing current standards, protocols, and
@@ -1504,57 +1499,52 @@ functionality is required.</p>
     <li data-md>
      <p>Resource servers with no existing trust relationship with identity providers.</p>
    </ol>
-   <h3 class="heading settled" data-level="2.1" id="out-of-scope"><span class="secno">2.1. </span><span class="content">Out of Scope</span><a class="self-link" href="#out-of-scope"></a></h3>
+   <h3 class="heading settled" data-level="1.1" id="intro-out-of-scope"><span class="secno">1.1. </span><span class="content">Out of Scope</span><a class="self-link" href="#intro-out-of-scope"></a></h3>
    <p><em>This section is non-normative</em></p>
    <p>At the time of writing, there is no demonstrated use case for a strongly asserted identity, however,
 it is likely that authorization requirements will necessitate it.</p>
-   <h2 class="heading settled" data-level="3" id="terminology"><span class="secno">3. </span><span class="content">Terminology</span><a class="self-link" href="#terminology"></a></h2>
+   <h2 class="heading settled" data-level="2" id="terms"><span class="secno">2. </span><span class="content">Terminology</span><a class="self-link" href="#terms"></a></h2>
    <p><em>This section is non-normative</em></p>
    <p>This specification uses the terms "access token", "authorization server", "resource server" (RS),
 "authorization endpoint", "token endpoint", "grant type", "access token reques", "access token
-response", and "client" defined by The OAuth 2.0 Authorization Framework <a href="https://tools.ietf.org/html/rfc6749">[RFC6749</a>\].</p>
+response", and "client" defined by The OAuth 2.0 Authorization Framework <a data-link-type="biblio" href="#biblio-rfc6749">[RFC6749]</a>.</p>
    <p>Throughout this specification, we will use the term Identity Provider (IdP) in line with the
 terminology used in the <a href="https://openid.net/specs/openid-connect-core-1_0.html">Open ID Connect Core 1.0 specification</a> (OIDC). It should be noted that <a href="https://tools.ietf.org/html/rfc6749">The OAuth 2.0 Authorization Framework</a> (OAuth) refers to this
 same entity as an Authorization Server.</p>
    <p>This specification also uses the following terms:</p>
-   <p><strong>WebID</strong> *as defined in the <a href="https://dvcs.w3.org/hg/WebID/raw-file/tip/spec/identity-respec.html">WebID 1.0 Editors Draft</a>*</p>
-   <p>A WebID is a URI with an HTTP or HTTPS scheme which denotes an Agent (Person, Organization, Group,
-Device, etc.)</p>
-   <p><strong>JSON Web Token (JWT)</strong> *as defined by <a href="https://tools.ietf.org/html/rfc7519">[RFC7519</a>\]*</p>
-   <p>A string representing a set of claims as a JSON object that is encoded in a JWS or JWE, enabling the
-claims to be digitally signed or MACed and/or encrypted.</p>
-   <p><strong>JSON Web Key (JWK)</strong> *as defined by <a href="https://tools.ietf.org/html/rfc7517">[RFC7517</a>\]*</p>
-   <p>A JSON object that represents a cryptographic key. The members of the object represent properties of
-the key, including its value.</p>
-   <p><strong>Demonstration of Proof-of-Possession at the Application Layer (DPoP)</strong> *as defined in the <a href="https://tools.ietf.org/html/draft-fett-oauth-dpop-04">DPoP Internet-Draft</a>*</p>
-   <p>A mechanism for sender-constraining OAuth tokens via a proof-of-possession mechanism on the
-application level.</p>
-   <p><strong>DPoP Proof</strong> *as defined by <a href="https://tools.ietf.org/html/draft-fett-oauth-dpop-04">DPoP Internet-Draft</a>*</p>
-   <p>A DPoP proof is a JWT that is signed (using JWS) using a private key chosen by the client.</p>
-   <p><strong>Proof Key for Code Exchange (PKCE)</strong> *as defined by <a href="https://tools.ietf.org/html/rfc7636">[RFC7636</a>\]*</p>
-   <p>An extension to the Authorization Code flow which mitigates the risk of an authorization code
-interception attack.</p>
-   <h2 class="heading settled" data-level="4" id="conformance"><span class="secno">4. </span><span class="content">Conformance</span><a class="self-link" href="#conformance"></a></h2>
-   <p><em>This section is non-normative</em></p>
-   <p>All authoring guidelines, diagrams, examples, and notes in this document are non-normative.
-Everything else in this specification is normative unless explicitly expressed otherwise.</p>
-   <p>The key words MAY, MUST, MUST NOT, RECOMMENDED, SHOULD, SHOULD NOT, and REQUIRED in this document
-are to be interpreted as described in <a href="https://tools.ietf.org/html/bcp14">BCP 14</a> <a href="https://www.w3.org/TR/2014/REC-cors-20140116/#refsRFC2119">[RFC2119</a>\] <a href="https://www.w3.org/TR/2019/REC-vc-data-model-20191119/#bib-rfc8174">[RFC8174</a>\] when, and only
-when, they appear in all capitals, as shown here.</p>
-   <h2 class="heading settled" data-level="5" id="core-concepts"><span class="secno">5. </span><span class="content">Core Concepts</span><a class="self-link" href="#core-concepts"></a></h2>
+   <dl>
+    <dt><em>WebID</em> as defined in the <a href="https://dvcs.w3.org/hg/WebID/raw-file/tip/spec/identity-respec.html">WebID 1.0 Editors Draft</a> 
+    <dd> A WebID is a URI with an HTTP or HTTPS scheme which denotes an Agent (Person, Organization, Group,
+    Device, etc.) 
+    <dt><em>JSON Web Token (JWT)</em> as defined by <a data-link-type="biblio" href="#biblio-rfc7519">[RFC7519]</a> 
+    <dd> A string representing a set of claims as a JSON object that is encoded in a JWS or JWE, enabling the
+    claims to be digitally signed or MACed and/or encrypted. 
+    <dt><em>JSON Web Key (JWK)</em> as defined by <a data-link-type="biblio" href="#biblio-rfc7517">[RFC7517]</a> 
+    <dd> A JSON object that represents a cryptographic key. The members of the object represent properties of
+    the key, including its value. 
+    <dt><em>Demonstration of Proof-of-Possession at the Application Layer (DPoP)</em> as defined in the <a href="https://tools.ietf.org/html/draft-fett-oauth-dpop-04">DPoP Internet-Draft</a> 
+    <dd> A mechanism for sender-constraining OAuth tokens via a proof-of-possession mechanism on the
+    application level. 
+    <dt><em>DPoP Proof</em> as defined by <a data-link-type="biblio" href="#biblio-dpop">[DPoP]</a> 
+    <dd> A DPoP proof is a JWT that is signed (using JWS) using a private key chosen by the client. 
+    <dt><em>Proof Key for Code Exchange (PKCE)</em> as defined by <a data-link-type="biblio" href="#biblio-rfc7636">[RFC7636]</a> 
+    <dd> An extension to the Authorization Code flow which mitigates the risk of an authorization code
+    interception attack. 
+   </dl>
+   <h2 class="heading settled" data-level="3" id="concepts"><span class="secno">3. </span><span class="content">Core Concepts</span><a class="self-link" href="#concepts"></a></h2>
    <p><em>This section is non-normative</em></p>
    <p>In a decentralized ecosystem, such as Solid, an IdP may be a preexisting IdP or vendor, or at the
 other end of the spectrum, a user-controlled IdP.</p>
-   <p>Therefore, this specification makes extensive use of OAuth and OIDC best practices and assumes the <a href="https://openid.net/specs/openid-connect-core-1_0.html#CodeFlowSteps">Authorization</a> Code Flow with
+   <p>Therefore, this specification makes extensive use of OAuth and OIDC best practices and assumes the <a href="https://openid.net/specs/openid-connect-core-1_0.html#CodeFlowSteps">Authorization Code Flow</a> with
 PKCE, as per OIDC definition. It is also assumed that there is no preexisting trust relationship
 with the IdP. This means dynamic, and static client registration is entirely optional.</p>
-   <h3 class="heading settled" data-level="5.1" id="webids"><span class="secno">5.1. </span><span class="content">WebIDs</span><a class="self-link" href="#webids"></a></h3>
+   <h3 class="heading settled" data-level="3.1" id="concepts-webids"><span class="secno">3.1. </span><span class="content">WebIDs</span><a class="self-link" href="#concepts-webids"></a></h3>
    <p><em>This section is non-normative</em></p>
    <p>In line with Linked Data principles, a <a href="https://dvcs.w3.org/hg/WebID/raw-file/tip/spec/identity-respec.html">WebID</a> is a HTTP URI that,
 when dereferenced, resolves to a profile document that is structured data in an <a href="https://www.w3.org/TR/2014/REC-rdf11-concepts-20140225/">RDF format</a>. This profile document allows
 people to link with others to grant access to identity resources as they see fit. WebIDs underpin
 Solid and are used as a primary identifier for Users and Client applications in this specification.</p>
-   <h2 class="heading settled" data-level="6" id="basic-flow"><span class="secno">6. </span><span class="content">Basic Flow</span><a class="self-link" href="#basic-flow"></a></h2>
+   <h2 class="heading settled" data-level="4" id="basic-flow"><span class="secno">4. </span><span class="content">Basic Flow</span><a class="self-link" href="#basic-flow"></a></h2>
    <p><em>This section is non-normative</em></p>
    <blockquote>
     <p>TODO: Add diagram.</p>
@@ -1580,16 +1570,16 @@ Solid and are used as a primary identifier for Users and Client applications in 
     <li data-md>
      <p>If the DPoP proof and Access Token are valid then The RS returns the requested resource.</p>
    </ol>
-   <h2 class="heading settled" data-level="7" id="client-identifiers"><span class="secno">7. </span><span class="content">Client Identifiers</span><a class="self-link" href="#client-identifiers"></a></h2>
+   <h2 class="heading settled" data-level="5" id="clientids"><span class="secno">5. </span><span class="content">Client Identifiers</span><a class="self-link" href="#clientids"></a></h2>
    <p>OAuth and OIDC require the Client application to identify itself to the IdP and RS by presenting a <a href="https://tools.ietf.org/html/rfc6749#section-2.2">client identifier</a> (Client ID). Solid applications
 SHOULD use a WebID as their Client ID.</p>
-   <h3 class="heading settled" data-level="7.1" id="webid"><span class="secno">7.1. </span><span class="content">WebID</span><a class="self-link" href="#webid"></a></h3>
+   <h3 class="heading settled" data-level="5.1" id="clientids-webid"><span class="secno">5.1. </span><span class="content">WebID</span><a class="self-link" href="#clientids-webid"></a></h3>
    <p>The WebID itself MUST resolve to an RDF document that MUST include a single <code>solid:oidcRegistration</code> property. That property MUST be a JSON serialization of an OIDC client registration, per the definition
-of client registration metadata from <a href="https://tools.ietf.org/html/rfc7591#section-2">[RFC7591</a>\].</p>
+of client registration metadata from <a data-link-type="biblio" href="#biblio-rfc7591">[RFC7591]</a> section 2.</p>
    <p>Also, the IdP MUST dereference the Client’s WebID document and match any Client-supplied parameters,
 with the values in the Client’s WebID document.</p>
    <p>Further, the <code>redirect_uri</code> provided by the Client MUST be included in the registration <code>redirect_uris</code> list.</p>
-   <p class="note" role="note"><span>NOTE:</span> the method by which the IdP resolves the WebID to an RDF document, is defined in <a href="https://www.w3.org/2005/Incubator/webid/spec/identity/#processing-the-webid-profile">[WebID 1.0</a>\].
+   <p class="note" role="note"><span>NOTE:</span> the method by which the IdP resolves the WebID to an RDF document, is defined in <a href="https://www.w3.org/2005/Incubator/webid/spec/identity/#processing-the-webid-profile">WebID 1.0</a>.
 This example uses <a href="https://www.w3.org/TR/turtle/">Turtle</a>:</p>
    <div class="example" id="example-11ef367c">
     <a class="self-link" href="#example-11ef367c"></a> 
@@ -1611,14 +1601,14 @@ This example uses <a href="https://www.w3.org/TR/turtle/">Turtle</a>:</p>
     }""" .
 </httpU0003A></pre>
    </div>
-   <h3 class="heading settled" data-level="7.2" id="the-public-webid"><span class="secno">7.2. </span><span class="content">The Public WebID</span><a class="self-link" href="#the-public-webid"></a></h3>
+   <h3 class="heading settled" data-level="5.2" id="clientids-public-webid"><span class="secno">5.2. </span><span class="content">The Public WebID</span><a class="self-link" href="#clientids-public-webid"></a></h3>
    <p>Ephemeral Clients MAY use the identifier <code>http://www.w3.org/ns/solid/terms#PublicOidcClient</code>. If the
 Client uses this identifier then IdP MAY accept any <code>redirect_uri</code> as valid. Since it is public, the
 Client is effectively anonymous to the RS.</p>
-   <h3 class="heading settled" data-level="7.3" id="oidc-registration"><span class="secno">7.3. </span><span class="content">OIDC Registration</span><a class="self-link" href="#oidc-registration"></a></h3>
+   <h3 class="heading settled" data-level="5.3" id="clientids-oidc"><span class="secno">5.3. </span><span class="content">OIDC Registration</span><a class="self-link" href="#clientids-oidc"></a></h3>
    <p>If the Client does not use a WebID then it MUST use a client identifier registered with the IdP via
 either OIDC dynamic or static registration.</p>
-   <h2 class="heading settled" data-level="8" id="token-instantiation"><span class="secno">8. </span><span class="content">Token Instantiation</span><a class="self-link" href="#token-instantiation"></a></h2>
+   <h2 class="heading settled" data-level="6" id="tokens"><span class="secno">6. </span><span class="content">Token Instantiation</span><a class="self-link" href="#tokens"></a></h2>
    <p>Assuming the Client ID and Secret, and the DPoP Proof are valid, the IdP MUST return two tokens to
 the Client:</p>
    <ol>
@@ -1627,8 +1617,8 @@ the Client:</p>
     <li data-md>
      <p>An OIDC ID Token</p>
    </ol>
-   <h3 class="heading settled" data-level="8.1" id="dpop-bound-access-token"><span class="secno">8.1. </span><span class="content">DPoP-bound Access Token</span><a class="self-link" href="#dpop-bound-access-token"></a></h3>
-   <p>The DPoP-bound Access Token MUST be a valid JWT. See <a href="https://tools.ietf.org/html/rfc7519">[RFC7519</a>\].</p>
+   <h3 class="heading settled" data-level="6.1" id="tokens-access"><span class="secno">6.1. </span><span class="content">DPoP-bound Access Token</span><a class="self-link" href="#tokens-access"></a></h3>
+   <p>The DPoP-bound Access Token MUST be a valid JWT. See <a data-link-type="biblio" href="#biblio-rfc7519">[RFC7519]</a>.</p>
    <p>When requesting an DPoP-bound Access Token, the Client MUST send the IdP a DPoP proof that is valid
 according to the <a href="https://tools.ietf.org/html/draft-fett-oauth-dpop-04">DPoP Internet-Draft</a>.</p>
    <p>The DPoP-bound Access Token MUST contain at least these claims:</p>
@@ -1655,7 +1645,7 @@ according to the <a href="https://tools.ietf.org/html/draft-fett-oauth-dpop-04">
 }
 </pre>
    </div>
-   <h3 class="heading settled" data-level="8.2" id="oidc-id-token"><span class="secno">8.2. </span><span class="content">OIDC ID Token</span><a class="self-link" href="#oidc-id-token"></a></h3>
+   <h3 class="heading settled" data-level="6.2" id="tokens-id"><span class="secno">6.2. </span><span class="content">OIDC ID Token</span><a class="self-link" href="#tokens-id"></a></h3>
    <p>The subject (<code>sub</code>) claim MUST be the user’s WebID.</p>
    <div class="example" id="example-7fb780ce">
     <a class="self-link" href="#example-7fb780ce"></a> 
@@ -1670,46 +1660,46 @@ according to the <a href="https://tools.ietf.org/html/draft-fett-oauth-dpop-04">
 }
 </pre>
    </div>
-   <h2 class="heading settled" data-level="9" id="resource-access"><span class="secno">9. </span><span class="content">Resource Access</span><a class="self-link" href="#resource-access"></a></h2>
-   <h3 class="heading settled" data-level="9.1" id="dpop-proof-validation"><span class="secno">9.1. </span><span class="content">DPoP Proof Validation</span><a class="self-link" href="#dpop-proof-validation"></a></h3>
+   <h2 class="heading settled" data-level="7" id="resource"><span class="secno">7. </span><span class="content">Resource Access</span><a class="self-link" href="#resource"></a></h2>
+   <h3 class="heading settled" data-level="7.1" id="resource-dpop-validation"><span class="secno">7.1. </span><span class="content">DPoP Proof Validation</span><a class="self-link" href="#resource-dpop-validation"></a></h3>
    <p>A DPoP Proof that is valid according to <a href="https://tools.ietf.org/html/draft-fett-oauth-dpop-04#section-4.2">DPoP Internet-Draft, Section 4.2</a>,
 MUST be present when a DPoP-bound Access Token is used.</p>
-   <h3 class="heading settled" data-level="9.2" id="access-token-validation"><span class="secno">9.2. </span><span class="content">Access Token Validation</span><a class="self-link" href="#access-token-validation"></a></h3>
+   <h3 class="heading settled" data-level="7.2" id="resource-access-validation"><span class="secno">7.2. </span><span class="content">Access Token Validation</span><a class="self-link" href="#resource-access-validation"></a></h3>
    <p>The DPoP-bound Access Token MUST be validated according to <a href="https://tools.ietf.org/html/draft-fett-oauth-dpop-04#section-7">DPoP Internet-Draft, Section 7</a> but the RS MAY perform additional verification in order to determine whether to grant access to the
 resource.</p>
    <p>The user’s WebID in the <code>sub</code> claim MUST be dereferenced and checked against the <code>iss</code> claim in the
 Access Token. If the <code>iss</code> claim is different from the domain of the WebID, then the RS MUST check
 the WebID document for a <code>solid:oidcIssuer</code> property to check the token issuer is listed. This
 prevents a malicious identity provider from issuing valid Access Tokens for arbitrary WebIDs.</p>
-   <h2 class="heading settled" data-level="10" id="security-considerations"><span class="secno">10. </span><span class="content">Security Considerations</span><a class="self-link" href="#security-considerations"></a></h2>
+   <h2 class="heading settled" data-level="8" id="security"><span class="secno">8. </span><span class="content">Security Considerations</span><a class="self-link" href="#security"></a></h2>
    <p><em>This section is non-normative</em></p>
    <p>As this specification builds upon existing web standards, security considerations from OAuth, OIDC,
 PKCE, and the DPoP specifications may also apply unless otherwise indicated. The following
 considerations should be reviewed by implementors and system/s architects of this specification.</p>
-   <h3 class="heading settled" data-level="10.1" id="tls-requirements"><span class="secno">10.1. </span><span class="content">TLS Requirements</span><a class="self-link" href="#tls-requirements"></a></h3>
+   <h3 class="heading settled" data-level="8.1" id="security-tls"><span class="secno">8.1. </span><span class="content">TLS Requirements</span><a class="self-link" href="#security-tls"></a></h3>
    <p>All TLS requirements outlined in <a href="https://tools.ietf.org/html/bcp195">[BCP195</a>\] apply to this
 specification.</p>
    <p>All tokens, Client, and User credentials MUST only be transmitted over TLS.</p>
-   <h3 class="heading settled" data-level="10.2" id="client-ids"><span class="secno">10.2. </span><span class="content">Client IDs</span><a class="self-link" href="#client-ids"></a></h3>
+   <h3 class="heading settled" data-level="8.2" id="security-client-ids"><span class="secno">8.2. </span><span class="content">Client IDs</span><a class="self-link" href="#security-client-ids"></a></h3>
    <p>An RS SHOULD assign a fixed set of low trust policies to any client identified as anonymous.</p>
    <p>Implementors SHOULD expire Client IDs that are kept in server storage to mitigate the potential for
 a bad actor to fill server storage with unexpired or otherwise useless Client IDs.</p>
-   <h3 class="heading settled" data-level="10.3" id="client-secrets"><span class="secno">10.3. </span><span class="content">Client Secrets</span><a class="self-link" href="#client-secrets"></a></h3>
+   <h3 class="heading settled" data-level="8.3" id="security-client-secrets"><span class="secno">8.3. </span><span class="content">Client Secrets</span><a class="self-link" href="#security-client-secrets"></a></h3>
    <p>Client secrets SHOULD NOT be stored in browser local storage. Doing so will increase the risk of
 data leaks should an attacker gain access to Client credentials.</p>
-   <h3 class="heading settled" data-level="10.4" id="client-trust"><span class="secno">10.4. </span><span class="content">Client Trust</span><a class="self-link" href="#client-trust"></a></h3>
+   <h3 class="heading settled" data-level="8.4" id="security-client-trust"><span class="secno">8.4. </span><span class="content">Client Trust</span><a class="self-link" href="#security-client-trust"></a></h3>
    <p><em>This section is non-normative</em></p>
    <p>Clients are ephemeral, client registration is optional, and most Clients cannot keep secrets. These,
 among other factors, are what makes Client trust challenging.</p>
-   <h2 class="heading settled" data-level="11" id="privacy-considerations"><span class="secno">11. </span><span class="content">Privacy Considerations</span><a class="self-link" href="#privacy-considerations"></a></h2>
-   <h3 class="heading settled" data-level="11.1" id="access-token-reuse"><span class="secno">11.1. </span><span class="content">Access Token Reuse</span><a class="self-link" href="#access-token-reuse"></a></h3>
+   <h2 class="heading settled" data-level="9" id="privacy"><span class="secno">9. </span><span class="content">Privacy Considerations</span><a class="self-link" href="#privacy"></a></h2>
+   <h3 class="heading settled" data-level="9.1" id="privacy-token-reuse"><span class="secno">9.1. </span><span class="content">Access Token Reuse</span><a class="self-link" href="#privacy-token-reuse"></a></h3>
    <p><em>This section is non-normative</em></p>
    <p>With JWTs being extendable by design, there is potential for a privacy breach if Access Tokens get
 reused across multiple resource servers. It is not unimaginable that a custom claim is added to the
 Access Token on instantiation. This addition may unintentionally give other resource servers
 consuming the Access Token information about the user that they may not wish to share outside of the
 intended RS.</p>
-   <h2 class="heading settled" data-level="12" id="acknowledgments"><span class="secno">12. </span><span class="content">Acknowledgments</span><a class="self-link" href="#acknowledgments"></a></h2>
+   <h2 class="heading settled" data-level="10" id="acknowledgments"><span class="secno">10. </span><span class="content">Acknowledgments</span><a class="self-link" href="#acknowledgments"></a></h2>
    <p><em>This section is non-normative</em></p>
    <p>The Solid Community Group would like to thank the following individuals for reviewing and providing
 feedback on the specification (in alphabetical order):</p>
@@ -1719,7 +1709,7 @@ Ottenheimer, Justin Richer, severin-dsr, Henry Story, Michael Thornburgh, Emmet 
 Verborgh, Ricky White, Paul Worrall, Dmitri Zagidulin.</p>
   </main>
   <div data-fill-with="conformance">
-   <h2 class="no-ref no-num heading settled" id="conformance①"><span class="content"> Conformance</span><a class="self-link" href="#conformance①"></a></h2>
+   <h2 class="no-ref no-num heading settled" id="conformance"><span class="content"> Conformance</span><a class="self-link" href="#conformance"></a></h2>
    <p> Conformance requirements are expressed with a combination of descriptive assertions and RFC 2119 terminology.
             The key words “MUST”, “MUST NOT”, “REQUIRED”, “SHALL”, “SHALL NOT”, “SHOULD”, “SHOULD NOT”, “RECOMMENDED”, “MAY”, and “OPTIONAL”
             in the normative parts of this document
@@ -1867,6 +1857,18 @@ Verborgh, Ricky White, Paul Worrall, Dmitri Zagidulin.</p>
   <h2 class="no-num no-ref heading settled" id="references"><span class="content">References</span><a class="self-link" href="#references"></a></h2>
   <h3 class="no-num no-ref heading settled" id="normative"><span class="content">Normative References</span><a class="self-link" href="#normative"></a></h3>
   <dl>
+   <dt id="biblio-dpop">[DPoP]
+   <dd>D. Fett; et al. <a href="https://tools.ietf.org/html/draft-fett-oauth-dpop-04">OAuth 2.0 Demonstration of Proof-of-Possession at the Application Layer (DPoP)</a>. URL: <a href="https://tools.ietf.org/html/draft-fett-oauth-dpop-04">https://tools.ietf.org/html/draft-fett-oauth-dpop-04</a>
    <dt id="biblio-rfc2119">[RFC2119]
    <dd>S. Bradner. <a href="https://tools.ietf.org/html/rfc2119">Key words for use in RFCs to Indicate Requirement Levels</a>. March 1997. Best Current Practice. URL: <a href="https://tools.ietf.org/html/rfc2119">https://tools.ietf.org/html/rfc2119</a>
+   <dt id="biblio-rfc6749">[RFC6749]
+   <dd>D. Hardt, Ed.. <a href="https://tools.ietf.org/html/rfc6749">The OAuth 2.0 Authorization Framework</a>. October 2012. Proposed Standard. URL: <a href="https://tools.ietf.org/html/rfc6749">https://tools.ietf.org/html/rfc6749</a>
+   <dt id="biblio-rfc7517">[RFC7517]
+   <dd>M. Jones. <a href="https://tools.ietf.org/html/rfc7517">JSON Web Key (JWK)</a>. May 2015. Proposed Standard. URL: <a href="https://tools.ietf.org/html/rfc7517">https://tools.ietf.org/html/rfc7517</a>
+   <dt id="biblio-rfc7519">[RFC7519]
+   <dd>M. Jones; J. Bradley; N. Sakimura. <a href="https://tools.ietf.org/html/rfc7519">JSON Web Token (JWT)</a>. May 2015. Proposed Standard. URL: <a href="https://tools.ietf.org/html/rfc7519">https://tools.ietf.org/html/rfc7519</a>
+   <dt id="biblio-rfc7591">[RFC7591]
+   <dd>J. Richer, Ed.; et al. <a href="https://tools.ietf.org/html/rfc7591">OAuth 2.0 Dynamic Client Registration Protocol</a>. July 2015. Proposed Standard. URL: <a href="https://tools.ietf.org/html/rfc7591">https://tools.ietf.org/html/rfc7591</a>
+   <dt id="biblio-rfc7636">[RFC7636]
+   <dd>N. Sakimura, Ed.; J. Bradley; N. Agarwal. <a href="https://tools.ietf.org/html/rfc7636">Proof Key for Code Exchange by OAuth Public Clients</a>. September 2015. Proposed Standard. URL: <a href="https://tools.ietf.org/html/rfc7636">https://tools.ietf.org/html/rfc7636</a>
   </dl>
