@@ -1223,7 +1223,7 @@ Possible extra rowspan handling
 </style>
   <meta content="Bikeshed version 5f7b0e20, updated Tue Aug 18 15:46:28 2020 -0700" name="generator">
   <link href="https://solid.github.io/specification/solid-oidc/" rel="canonical">
-  <meta content="b9d4fb601188be96bf7cdbcaf0f872fe0462c136" name="document-revision">
+  <meta content="b0fef1719c3f6a554776f10cb69b8a6e821187d1" name="document-revision">
 <style>/* style-autolinks */
 
 .css.css, .property.property, .descriptor.descriptor {
@@ -1546,9 +1546,6 @@ people to link with others to grant access to identity resources as they see fit
 Solid and are used as a primary identifier for Users and Client applications in this specification.</p>
    <h2 class="heading settled" data-level="4" id="basic-flow"><span class="secno">4. </span><span class="content">Basic Flow</span><a class="self-link" href="#basic-flow"></a></h2>
    <p><em>This section is non-normative</em></p>
-   <blockquote>
-    <p>TODO: Add diagram.</p>
-   </blockquote>
    <p>The basic authentication and authorization flow is as follows:</p>
    <ol>
     <li data-md>
@@ -1570,6 +1567,10 @@ Solid and are used as a primary identifier for Users and Client applications in 
     <li data-md>
      <p>If the DPoP proof and Access Token are valid then The RS returns the requested resource.</p>
    </ol>
+   <figure id="fig-signature">
+     <img src="basic-flow-diagram.png"> 
+    <figcaption>Basic flow of authentication and authorization as described above.</figcaption>
+   </figure>
    <h2 class="heading settled" data-level="5" id="clientids"><span class="secno">5. </span><span class="content">Client Identifiers</span><a class="self-link" href="#clientids"></a></h2>
    <p>OAuth and OIDC require the Client application to identify itself to the IdP and RS by presenting a <a href="https://tools.ietf.org/html/rfc6749#section-2.2">client identifier</a> (Client ID). Solid applications
 SHOULD use a WebID as their Client ID.</p>
