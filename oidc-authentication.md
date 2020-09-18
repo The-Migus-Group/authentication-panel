@@ -154,8 +154,6 @@ Solid and are used as a primary identifier for Users and Client applications in 
 
 _This section is non-normative_
 
-> TODO: Add diagram.
-
 The basic authentication and authorization flow is as follows:
 
 1. The Client requests a non-public resource from the RS.
@@ -168,6 +166,8 @@ The basic authentication and authorization flow is as follows:
 6. The Client presents the DPoP-bound Access Token and DPoP proof, to the RS.
 7. The RS gets the public key from the IdP and uses it to validate the DPoP proof and Access Token.
 8. If the DPoP proof and Access Token are valid then The RS returns the requested resource.
+
+![Basic Flow Diagram](./basic-flow-diagram.png)
 
 # Client Identifiers
 
