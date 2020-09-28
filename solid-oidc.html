@@ -1223,7 +1223,7 @@ Possible extra rowspan handling
 </style>
   <meta content="Bikeshed version 5f7b0e20, updated Tue Aug 18 15:46:28 2020 -0700" name="generator">
   <link href="https://solid.github.io/specification/solid-oidc/" rel="canonical">
-  <meta content="b0fef1719c3f6a554776f10cb69b8a6e821187d1" name="document-revision">
+  <meta content="dff5747102a8a0aebb311767c9037a940ee0d8eb" name="document-revision">
 <style>/* style-autolinks */
 
 .css.css, .property.property, .descriptor.descriptor {
@@ -1375,11 +1375,11 @@ dfn > a.self-link::before      { content: "#"; }</style>
   <div class="head">
    <p data-fill-with="logo"></p>
    <h1 class="p-name no-ref allcaps" id="title">SOLID-OIDC</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">W3C First Public Working Draft, <time class="dt-updated" datetime="2020-09-17">17 September 2020</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">W3C First Public Working Draft, <time class="dt-updated" datetime="2020-09-28">28 September 2020</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
-     <dd><a class="u-url" href="https://www.w3.org/TR/2020/WD-solid-oidc-1-20200917/">https://www.w3.org/TR/2020/WD-solid-oidc-1-20200917/</a>
+     <dd><a class="u-url" href="https://www.w3.org/TR/2020/WD-solid-oidc-1-20200928/">https://www.w3.org/TR/2020/WD-solid-oidc-1-20200928/</a>
      <dt>Editor's Draft:
      <dd><a href="https://solid.github.io/specification/solid-oidc/">https://solid.github.io/specification/solid-oidc/</a>
      <dt>Issue Tracking:
@@ -1392,7 +1392,7 @@ dfn > a.self-link::before      { content: "#"; }</style>
    <div data-fill-with="warning"></div>
    <p class="copyright" data-fill-with="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="https://licensebuttons.net/p/zero/1.0/80x15.png"></a> To the extent possible under law, the editors have waived all copyright
 and related or neighboring rights to this work.
-In addition, as of 17 September 2020,
+In addition, as of 28 September 2020,
 the editors have made this specification available under the <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0.
 Parts of this work may be from another specification document.  If so, those parts are instead covered by the license of that specification document. </p>
@@ -1623,18 +1623,18 @@ the Client:</p>
    <p>When requesting an DPoP-bound Access Token, the Client MUST send the IdP a DPoP proof that is valid
 according to the <a href="https://tools.ietf.org/html/draft-fett-oauth-dpop-04">DPoP Internet-Draft</a>.</p>
    <p>The DPoP-bound Access Token MUST contain at least these claims:</p>
-   <p><code>sub</code> — REQUIRED. This claim MUST be the user’s WebID.</p>
+   <p><code>webid</code> — REQUIRED. This claim MUST be the user’s WebID.</p>
    <p><code>iss</code> — REQUIRED. The issuer claim MUST be a valid URL of the IdP instantiating this token.</p>
    <p><code>aud</code> — REQUIRED. However, the DPoP token provides the full URL of the request, making the <code>aud</code> claim redundant, so in Solid-OIDC the <code>aud</code> claim MUST be a string with the value of <code>solid</code>.</p>
    <p><code>iat</code> — REQUIRED. The issued-at claim is the time at which this crendential was issued.</p>
    <p><code>exp</code> — REQUIRED. This credential expiration is seperate from the ID tokens expiration.</p>
    <p><code>cnf</code> — For all flows that require DPoP, the confirmation claim is REQUIRED, as per <a href="https://tools.ietf.org/html/draft-fett-oauth-dpop-04#section-7">DPoP Internet-Draft</a> specification.</p>
    <p><code>client_id</code> — REQUIRED in all flows except OIDC registration.</p>
-   <div class="example" id="example-36b59c27">
-    <a class="self-link" href="#example-36b59c27"></a> 
+   <div class="example" id="example-908dd023">
+    <a class="self-link" href="#example-908dd023"></a> 
     <p>An example DPoP-bound Access Token: </p>
 <pre>{
-    "sub": "https://janedoe.com/web#id",
+    "webid": "https://janedoe.com/web#id",
     "iss": "https://idp.example.com",
     "aud": "solid",
     "iat": 1541493724,
@@ -1668,7 +1668,7 @@ MUST be present when a DPoP-bound Access Token is used.</p>
    <h3 class="heading settled" data-level="7.2" id="resource-access-validation"><span class="secno">7.2. </span><span class="content">Access Token Validation</span><a class="self-link" href="#resource-access-validation"></a></h3>
    <p>The DPoP-bound Access Token MUST be validated according to <a href="https://tools.ietf.org/html/draft-fett-oauth-dpop-04#section-7">DPoP Internet-Draft, Section 7</a> but the RS MAY perform additional verification in order to determine whether to grant access to the
 resource.</p>
-   <p>The user’s WebID in the <code>sub</code> claim MUST be dereferenced and checked against the <code>iss</code> claim in the
+   <p>The user’s WebID in the <code>webid</code> claim MUST be dereferenced and checked against the <code>iss</code> claim in the
 Access Token. If the <code>iss</code> claim is different from the domain of the WebID, then the RS MUST check
 the WebID document for a <code>solid:oidcIssuer</code> property to check the token issuer is listed. This
 prevents a malicious identity provider from issuing valid Access Tokens for arbitrary WebIDs.</p>
@@ -1678,7 +1678,7 @@ prevents a malicious identity provider from issuing valid Access Tokens for arbi
 PKCE, and the DPoP specifications may also apply unless otherwise indicated. The following
 considerations should be reviewed by implementors and system/s architects of this specification.</p>
    <h3 class="heading settled" data-level="8.1" id="security-tls"><span class="secno">8.1. </span><span class="content">TLS Requirements</span><a class="self-link" href="#security-tls"></a></h3>
-   <p>All TLS requirements outlined in <a href="https://tools.ietf.org/html/bcp195">[BCP195</a>\] apply to this
+   <p>All TLS requirements outlined in <a href="https://tools.ietf.org/html/bcp195">[BCP195</a>] apply to this
 specification.</p>
    <p>All tokens, Client, and User credentials MUST only be transmitted over TLS.</p>
    <h3 class="heading settled" data-level="8.2" id="security-client-ids"><span class="secno">8.2. </span><span class="content">Client IDs</span><a class="self-link" href="#security-client-ids"></a></h3>

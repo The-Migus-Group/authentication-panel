@@ -241,7 +241,7 @@ according to the [DPoP Internet-Draft](https://tools.ietf.org/html/draft-fett-oa
 
 The DPoP-bound Access Token MUST contain at least these claims:
 
-`sub` — REQUIRED. This claim MUST be the user's WebID.
+`webid` — REQUIRED. This claim MUST be the user's WebID.
 
 `iss` — REQUIRED. The issuer claim MUST be a valid URL of the IdP instantiating this token.
 
@@ -262,7 +262,7 @@ claim redundant, so in Solid-OIDC the `aud` claim MUST be a string with the valu
 
     <pre>
     {
-        "sub": "https://janedoe.com/web#id",
+        "webid": "https://janedoe.com/web#id",
         "iss": "https://idp.example.com",
         "aud": "solid",
         "iat": 1541493724,
@@ -309,7 +309,7 @@ The DPoP-bound Access Token MUST be validated according to
 but the RS MAY perform additional verification in order to determine whether to grant access to the
 resource.
 
-The user's WebID in the `sub` claim MUST be dereferenced and checked against the `iss` claim in the
+The user's WebID in the `webid` claim MUST be dereferenced and checked against the `iss` claim in the
 Access Token. If the `iss` claim is different from the domain of the WebID, then the RS MUST check
 the WebID document for a `solid:oidcIssuer` property to check the token issuer is listed. This
 prevents a malicious identity provider from issuing valid Access Tokens for arbitrary WebIDs.
@@ -324,7 +324,7 @@ considerations should be reviewed by implementors and system/s architects of thi
 
 ## TLS Requirements ## {#security-tls}
 
-All TLS requirements outlined in \[[BCP195](https://tools.ietf.org/html/bcp195)\] apply to this
+All TLS requirements outlined in [[BCP195](https://tools.ietf.org/html/bcp195)] apply to this
 specification.
 
 All tokens, Client, and User credentials MUST only be transmitted over TLS.
