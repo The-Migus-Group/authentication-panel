@@ -1223,7 +1223,7 @@ Possible extra rowspan handling
 </style>
   <meta content="Bikeshed version 5f7b0e20, updated Tue Aug 18 15:46:28 2020 -0700" name="generator">
   <link href="https://solid.github.io/specification/solid-oidc/" rel="canonical">
-  <meta content="2546b4fa217f7f48e1948fdf046bf49c89edef0b" name="document-revision">
+  <meta content="2b21ef76ed7a6c7c35962229e044bbeb65266467" name="document-revision">
 <style>/* style-autolinks */
 
 .css.css, .property.property, .descriptor.descriptor {
@@ -1385,8 +1385,8 @@ dfn > a.self-link::before      { content: "#"; }</style>
      <dt>Issue Tracking:
      <dd><a href="https://github.com/solid/specification/issues/">GitHub</a>
      <dt class="editor">Editors:
-     <dd class="editor p-author h-card vcard"><span class="p-name fn">Adam Migus</span>
-     <dd class="editor p-author h-card vcard"><span class="p-name fn">Ricky White</span>
+     <dd class="editor p-author h-card vcard"><span class="p-name fn"><a href="https://migusgroup.com/about/">Adam Migus</a> (<a href="https://migusgroup.com/">The Migus Group</a>)</span>
+     <dd class="editor p-author h-card vcard"><span class="p-name fn"><a href="https://endlesstrax.com">Ricky White</a> (<a href="https://migusgroup.com/">The Migus Group</a>)</span>
     </dl>
    </div>
    <div data-fill-with="warning"></div>
@@ -1552,10 +1552,10 @@ Solid and are used as a primary identifier for Users and Client applications in 
      <p>The Client requests a non-public resource from the RS.</p>
     <li data-md>
      <p>The RS returns a 401 with a <code>WWW-Authenticate</code> HTTP header containing parameters that inform the
-   Client that a DPoP-bound Access Token is required.</p>
+Client that a DPoP-bound Access Token is required.</p>
     <li data-md>
      <p>The Client presents its Client Identifier and the associated Secret to the IdP and requests an
-   Authorization Code.</p>
+Authorization Code.</p>
     <li data-md>
      <p>If granted, the Client presents the Authorization Code and a DPoP proof, to the Token Endpoint.</p>
     <li data-md>
