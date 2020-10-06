@@ -57,7 +57,7 @@ client.
 The [OAuth 2.0](https://tools.ietf.org/html/rfc6749) and
 [OpenID Connect Core 1.0](https://openid.net/specs/openid-connect-core-1_0.html) web standards were
 published in October 2012 and November 2014, respectively. Since publication, they have increased
-with a marked pace and have claimed wide adoption with extensive _'real-world'_ data and experience.
+with a marked pace and have claimed wide adoption with extensive *"real-world"* data and experience.
 The strengths of the protocols are now clear; however, in a changing eco-system where privacy and
 control of digital identities are becoming more pressing concerns, it is also clear that additional
 functionality is required.
@@ -79,7 +79,7 @@ it is likely that authorization requirements will necessitate it.
 *This section is non-normative*
 
 This specification uses the terms "access token", "authorization server", "resource server" (RS),
-"authorization endpoint", "token endpoint", "grant type", "access token reques", "access token
+"authorization endpoint", "token endpoint", "grant type", "access token request", "access token
 response", and "client" defined by The OAuth 2.0 Authorization Framework
 [[!RFC6749]].
 
@@ -307,7 +307,7 @@ MUST be present when a DPoP-bound Access Token is used.
 The DPoP-bound Access Token MUST be validated according to
 [DPoP Internet-Draft, Section 7](https://tools.ietf.org/html/draft-fett-oauth-dpop-04#section-7)
 but the RS MAY perform additional verification in order to determine whether to grant access to the
-resource.
+requested resource.
 
 The user's WebID in the `webid` claim MUST be dereferenced and checked against the `iss` claim in the
 Access Token. If the `iss` claim is different from the domain of the WebID, then the RS MUST check
