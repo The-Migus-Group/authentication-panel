@@ -19,7 +19,7 @@ Abstract:
 </pre>
 
 <h2 class="no-num no-toc" id="status">Status of This Document</h2>
-    
+
 This section describes the status of this document at the time of its publication. Other documents
 may supersede this document. A list of current W3C publications and the latest revision of this
 technical report can be found in the [W3C technical reports index](https://www.w3.org/TR/) at
@@ -62,10 +62,10 @@ The strengths of the protocols are now clear; however, in a changing eco-system 
 control of digital identities are becoming more pressing concerns, it is also clear that additional
 functionality is required.
 
-The additional functionality is aimed at addressing:
+The additional functionality documented herein aims to address:
 
-1. Ephemeral Clients as a common use case.
-2. Resource servers with no existing trust relationship with identity providers.
+1. Resource servers having no existing trust relationship with identity providers.
+2. Ephemeral Clients as a first-order use-case.
 
 ## Out of Scope ## {#intro-out-of-scope}
 
@@ -108,7 +108,7 @@ This specification also uses the following terms:
     A JSON object that represents a cryptographic key. The members of the object represent properties of
     the key, including its value.
 
-<dt>*Demonstration of Proof-of-Possession at the Application Layer (DPoP)* as defined in the 
+<dt>*Demonstration of Proof-of-Possession at the Application Layer (DPoP)* as defined in the
 [DPoP Internet-Draft](https://tools.ietf.org/html/draft-fett-oauth-dpop-04)
 <dd>
     A mechanism for sender-constraining OAuth tokens via a proof-of-possession mechanism on the
@@ -128,13 +128,15 @@ This specification also uses the following terms:
 
 *This section is non-normative*
 
-In a decentralized ecosystem, such as Solid, an IdP may be a preexisting IdP or vendor, or at the
-other end of the spectrum, a user-controlled IdP.
+In a decentralized ecosystem, such as Solid, an IdP may be an identity-as-a-service vendor or, at
+the other end of the spectrum, a user-controlled IdP. In any case, the user may be authenticating
+from a browser or an application.
 
-Therefore, this specification makes extensive use of OAuth and OIDC best practices and assumes the
+Therefore, this specification assumes the use of the
 [Authorization Code Flow](https://openid.net/specs/openid-connect-core-1_0.html#CodeFlowSteps) with
-PKCE, as per OIDC definition. It is also assumed that there is no preexisting trust relationship
-with the IdP. This means dynamic, and static client registration is entirely optional.
+PKCE, in accordance with OAuth and OIDC best practices. It is also assumes that there are no
+preexisting trust relationship with the IdP. This means that client registration, whether dynamic,
+or static, is entirely optional.
 
 ## WebIDs ## {#concepts-webids}
 
@@ -154,7 +156,7 @@ Solid and are used as a primary identifier for Users and Client applications in 
 The basic authentication and authorization flow is as follows:
 
 1. The Client requests a non-public resource from the RS.
-2. The RS returns a 401 with a `WWW-Authenticate` HTTP header containing parameters that inform the 
+2. The RS returns a 401 with a `WWW-Authenticate` HTTP header containing parameters that inform the
     Client that a DPoP-bound Access Token is required.
 3. The Client presents its Client Identifier and the associated Secret to the IdP and requests an
     Authorization Code.
@@ -221,8 +223,8 @@ Client is effectively anonymous to the RS.
 
 ## OIDC Registration ## {#clientids-oidc}
 
-If the Client does not use a WebID then it MUST use a client identifier registered with the IdP via
-either OIDC dynamic or static registration.
+If the Client does not use a WebID as the client identifier, then it MUST present a client identifier
+registered with the IdP via either OIDC dynamic or static registration.
 
 # Token Instantiation # {#tokens}
 
@@ -374,18 +376,18 @@ Verborgh, Ricky White, Paul Worrall, Dmitri Zagidulin.
 
 <pre class=biblio>
 {
-	"DPOP": {
-		"authors": [
-			"D. Fett", 
-            "B. Campbell", 
-            "J. Bradley", 
-            "T. Lodderstedt", 
-            "M. Jones", 
+    "DPOP": {
+        "authors": [
+            "D. Fett",
+            "B. Campbell",
+            "J. Bradley",
+            "T. Lodderstedt",
+            "M. Jones",
             "D. Waite"
-		],
-		"href": "https://tools.ietf.org/html/draft-fett-oauth-dpop-04",
-		"title": "OAuth 2.0 Demonstration of Proof-of-Possession at the Application Layer (DPoP)",
-		"publisher": "IETF"
-	}
+        ],
+        "href": "https://tools.ietf.org/html/draft-fett-oauth-dpop-04",
+        "title": "OAuth 2.0 Demonstration of Proof-of-Possession at the Application Layer (DPoP)",
+        "publisher": "IETF"
+    }
 }
 </pre>
